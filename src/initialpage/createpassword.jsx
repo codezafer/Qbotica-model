@@ -9,7 +9,6 @@ import { Applogo } from '../Entryfile/imagepath.jsx'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
-import { alphaNumericPattern, emailrgx } from '../constant'
 import { create } from 'yup/lib/Reference.js';
 import { clearTempEmailId, getTempEmailId } from '../handlers/tempEmailIdUtils';
 
@@ -102,28 +101,16 @@ const CreatePassword = (props) => {
       clearErrors(['email', 'password'])
       setTimeout(() => {
         props.history.push('/login')
-      }, 500)
-
-    }
-    
-    clearTempEmailId()
+      }, 500)   
+   }
+   clearTempEmailId();
   }
+
 
   const onEyeClick = () => {
     seteye(!eye)
   }
-  //  const onUserLogin = e => {
-  //      e.preventDefault();
 
-  //      if (this.state.email !== '' && this.state.password !== '') {
-  //        this.props.signinUserInFirebase(this.state, this.props.history);
-
-
-  //      }
-  //    }
-
-
-  //  const { loading } = props;
   return (
 
     <>
@@ -132,11 +119,10 @@ const CreatePassword = (props) => {
         <meta name="description" content="Login page" />
       </Helmet>
       <div className="account-content">
-        {/* <Link to="/applyjob/joblist" className="btn btn-primary apply-btn">Apply Job</Link> */}
         <div className="container">
           {/* Account Logo */}
           <div className="account-logo">
-            <Link to="/app/main/dashboard"><img src={Applogo} alt="Dreamguy's Technologies" /></Link>
+            <Link to="/login"><img src={Applogo} alt="Qbotica" /></Link>
           </div>
           {/* /Account Logo */}
           <div className="account-box">
@@ -186,7 +172,7 @@ const CreatePassword = (props) => {
                   </div>
 
                   <div className="form-group text-center">
-                    <button className="btn btn-primary account-btn" type="submit">Register</button>
+                    <button className="btn btn-primary account-btn" type="submit" >Register </button>
                   </div>
                 </form>
                 {/* <div className="account-footer">

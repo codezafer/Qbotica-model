@@ -11,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 import { alphaNumericPattern, emailrgx } from '../constant'
 import axios from 'axios'
-import {setTempEmailId} from '../handlers/tempEmailIdUtils'
+import {setTempEmailId, clearTempEmailId} from '../handlers/tempEmailIdUtils'
 
 
 // const schema = yup
@@ -94,7 +94,7 @@ const Loginpage = (props) => {
 
     const loginRequest = await loginApi();
     if (loginRequest.times === 2) {
-      // setSuccessMsg(loginRequest.msg)
+      setSuccessMsg("Logged in successfull")
       clearErrors(['email', 'password', 'error'])
       setTimeout(() => {
         props.history.push('/app/main/dashboard')
@@ -107,19 +107,7 @@ const Loginpage = (props) => {
       })
       return props.history.push('/login')
     }
-
-    console.log("err:", errors)
-    // console.log("data", data)
-
-    // if (data.password != "123456") {
-    //   setError('password', {
-    //     message: 'password is mismatch',
-    //   })
-    // } else {
-    //   clearErrors('password')
-    //   props.history.push('/app/main/dashboard')
-
-    // }
+    clearTempEmailId(emailId)
   }
 
   const onEyeClick = () => {
@@ -140,7 +128,7 @@ const Loginpage = (props) => {
         <div className="container">
           {/* Account Logo */}
           <div className="account-logo">
-            <Link to="/login"><img src={Applogo} alt="Dreamguy's Technologies" /></Link>
+            <Link to="/login"><img src={Applogo} alt="Qbotica" /></Link>
           </div>
           {/* /Account Logo */}
           <div className="account-box">

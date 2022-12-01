@@ -7,11 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 import { alphaNumericPattern, emailrgx } from '../constant'
 import { Modal } from 'antd';
-import { Alert } from 'reactstrap';
-import { faCopy } from '@fortawesome/free-regular-svg-icons';
-
-
-
 
 // const schema = yup
 //   .object({
@@ -37,6 +32,10 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [modalText, setModalText] = useState();
+    const [copied, setCopied] = useState(false);
+
+    
+  
   
     const {
       control,
@@ -44,21 +43,6 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
       clearErrors,
       formState: { errors },
     } = useForm()
-  
-    // const regsiterApi = async (e) => {
-    //   e.preventDefault()
-    //   const url = "http://localhost:3000/login";
-    //   axios(config)
-    //     .then(function (response) {
-    //       console.log(JSON.stringify(response.data));
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // };
-
-    
-  
     
   
     async function regsiterApi() {
@@ -113,32 +97,33 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
         })
       }
       else{
-      clearErrors(['email'])
+      clearErrors(['email','error'])
       setOpen(true)
       setModalText(msg)
+      setCopied(navigator.clipboard.writeText(msg))
     }
   }
   
-   
   
-    const showModal = () => {
+    const showModal  = () => {
       setOpen(false);
     };
   
-  
+    
     const handleOk = () => {
-      setModalText("Copied!")
       setLoading(true);
       setTimeout(() => {
         setOpen(false);
         setLoading(false);
-      }, 2000);
+      }, 1000);
     };
+
+    
   
-    const handleCancel = () => {
-      console.log('Clicked cancel button');
-      setOpen(false)
-    };
+    // const handleCancel = () => {
+    //   console.log('Clicked cancel button');
+    //   setOpen(false)
+    // };
   
   
     return (
@@ -155,7 +140,7 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
           <div className="container">
             {/* Account Logo */}
             <div className="account-logo">
-              <Link to="/login"><img src={Applogo} alt="" /></Link>
+              <Link to="/login"><img src={Applogo} alt="Qbotica" /></Link>
             </div>
             {/* /Account Logo */}
             <div className="account-box">
@@ -173,7 +158,7 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
                         name="email"
                         control={control}
                         render={({ field: { value, onChange } }) => (
-                          <input className={`form-control  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setEmailId(e.target.value)} autoComplete={true} />
+                          <input className={`form-control  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setEmailId(e.target.value)}  />
   
                         )}
                       />
@@ -191,14 +176,13 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
                         render={({ field: { value, onChange } }) => (
                           <div className="pass-group">
   
-                            <select className={`form-control2  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setRole(e.target.value)}>select
-                              <option value="" disabled selected>Select</option>
+                            <select className={`form-control2  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setRole(e.target.value)} defaultValue={'DEFAULT'} >
+                              <option value="DEFAULT" disabled >Select</option>
                               <option value="HR qBotica">Admin</option>
                               <option value="Interviewer">Interviewer</option>
                               <option value="External">External</option>
                               <option value="External">Internal Panel</option>
                             </select>
-  
                           </div>
                         )}
   
@@ -214,15 +198,14 @@ import { faCopy } from '@fortawesome/free-regular-svg-icons';
                         title="Password"
                         open={open}
                         onOk={handleOk}
-                        loading={loading}
-                        onCancel={handleCancel}
-                        footer={[
-                          <button  key="submit" id='copy' type="button" className='btn btn-info me-1' loading={loading} onClick={handleOk}>
+                        // onCancel={handleCancel}
+                        footer={[  
+                          <button  key="submit" id='copy' type="button" className='btn btn-info me-1' loading={loading} onClick={handleOk} copy={copied} >
                             Copy
-                          </button>, 
-                          <button key="back" type="button" className='btn btn-dark me-1'  onClick={handleCancel} >
-                          Cancel
-                        </button>
+                          </button>
+                        //   <button key="back" type="button" className='btn btn-dark me-1'  onClick={handleCancel} >
+                        //   Cancel
+                        // </button>
                         ]}
                       >
                         <p><strong>{modalText}</strong></p>

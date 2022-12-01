@@ -19,7 +19,7 @@ const Lockscreen = () => {
             <div className="container">
               {/* Account Logo */}
               <div className="account-logo">
-                <Link to="/app/main/dashboard"><img src={Applogo} alt="Dreamguy's Technologies" /></Link>
+                <Link to="/login"><img src={Applogo} alt="Qbotica" /></Link>
               </div>
               {/* /Account Logo */}
               <div className="account-box">
