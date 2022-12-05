@@ -4,9 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-/webpack.config.js
 /yarn.lock
-/.babelrc
 
 # testing
 /coverage
