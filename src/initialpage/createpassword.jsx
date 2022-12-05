@@ -76,6 +76,7 @@ const CreatePassword = (props) => {
       const req = await fetch(url, options);
       const res = await req.json();
       return res;
+      
     } catch (err) { console.log(err) }
 
   }
@@ -175,9 +176,6 @@ const CreatePassword = (props) => {
                     <button className="btn btn-primary account-btn" type="submit" >Register </button>
                   </div>
                 </form>
-                {/* <div className="account-footer">
-                   <p>Already have an account? <Link to="/login">Login</Link></p>
-                 </div> */}
               </div>
               {/* /Account Form */}
             </div>

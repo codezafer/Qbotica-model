@@ -2,11 +2,29 @@
  * Signin Firebase
  */
 
- import React, { useEffect } from 'react';
+ import axios, { Axios } from 'axios';
+import React, { useEffect } from 'react';
  import { Helmet } from "react-helmet";
+
+ 
  
  const Requisition = () => {
+
+  const url = "https://638dd2c84190defdb74e5f41.mockapi.io/Job-Post";
+
+ const fetchData = async () => {
+  try {
+    // axios.get(), axios.post(),axios.put(), axios.delete()
+    const response = await axios(url);
+
+    console.log(response);
+  } catch (error) {
+    console.log(error.response);
+  }
+}; 
+
    useEffect(() => {
+    fetchData()
      if ($('.select').length > 0) {
        $('.select').select2({
          minimumResultsForSearch: -1,

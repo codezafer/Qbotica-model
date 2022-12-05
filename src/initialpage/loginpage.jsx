@@ -72,6 +72,7 @@ const Loginpage = (props) => {
     try {
     const req = await fetch(url, options);
     const res = await req.json();
+    console.log(req);
     return res;
   } catch(err) {console.log(err)}
 
@@ -146,7 +147,7 @@ const Loginpage = (props) => {
                       name="email"
                       control={control}
                       render={({ field: { value, onChange } }) => (
-                        <input className={`form-control  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setEmailId(e.target.value)} autoComplete={true} />
+                        <input className={`form-control  ${errors?.email ? "error-input" : ""}`} type="text" value={value} onChange={(e) => setEmailId(e.target.value)}/>
 
                       )}
                     />
