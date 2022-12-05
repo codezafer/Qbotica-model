@@ -111,6 +111,7 @@ import { Modal } from 'antd';
   
     
     const handleOk = () => {
+      setModalText("Copied!")
       setLoading(true);
       setTimeout(() => {
         setOpen(false);
@@ -121,7 +122,6 @@ import { Modal } from 'antd';
     
   
     // const handleCancel = () => {
-    //   console.log('Clicked cancel button');
     //   setOpen(false)
     // };
   

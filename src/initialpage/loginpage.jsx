@@ -99,6 +99,7 @@ const Loginpage = (props) => {
       setTimeout(() => {
         props.history.push('/app/main/dashboard')
       }, 500)
+      clearTempEmailId(emailId)
     } else if (loginRequest.times === 1 && emailrgx.test(emailId) ){
       props.history.push('/createpassword')
     } else{
@@ -107,7 +108,6 @@ const Loginpage = (props) => {
       })
       return props.history.push('/login')
     }
-    clearTempEmailId(emailId)
   }
 
   const onEyeClick = () => {

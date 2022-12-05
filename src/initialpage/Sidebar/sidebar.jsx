@@ -54,6 +54,7 @@ const toggleLevelThree = (value) => {
                 <a href="#" className={isSideMenu == "jobs" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="jobs" ? "": "jobs")}><i className="la la-briefcase" /> <span> Jobs </span> <span className="menu-arrow" /></a>
                 { isSideMenu == "jobs" ? 
                 <ul>
+                  <li><Link className={pathname.includes('requisition') ?"active" :""} to="/app/administrator/requisition"> Requisition </Link></li>
                   <li><Link className={pathname.includes('user-dashboard') || pathname.includes('user-all-jobs')|| pathname.includes('saved-jobs')
                       || pathname.includes('applied-jobs')|| pathname.includes('interviewing')|| pathname.includes('offered-jobs')|| 
                       pathname.includes('visited-jobs') || pathname.includes('archived-jobs')
@@ -70,6 +71,7 @@ const toggleLevelThree = (value) => {
                   {/* <li><Link className={pathname.includes('schedule-timing') ?"active" :""} to="/app/administrator/schedule-timing"> Schedule timing </Link></li>
                   <li><Link className={pathname.includes('apptitude-result') ?"active" :""} to="/app/administrator/apptitude-result"> Aptitude Results </Link></li> */}
                   
+
                 </ul>
                   :"" 
                 }

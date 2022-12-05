@@ -65,9 +65,7 @@ export default class App extends Component {
             //     return (<Redirect to={'/app/main/dashboard'} />);
             }
             // }
-            if (location.pathname === '/') {                 
-                   return (<Redirect to={'/app/main/dashboard'} />);                
-             }
+            
             return (
                 <Switch>
                     {/* <InitialPath
