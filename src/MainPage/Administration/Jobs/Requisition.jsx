@@ -1,37 +1,61 @@
-/**
- * Signin Firebase
- */
-
- import axios, { Axios } from 'axios';
-import React, { useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
  import { Helmet } from "react-helmet";
-
- 
+ import axios, { Axios } from 'axios';
  
  const Requisition = () => {
-
-  const url = "https://638dd2c84190defdb74e5f41.mockapi.io/Job-Post";
-
- const fetchData = async () => {
-  try {
-    // axios.get(), axios.post(),axios.put(), axios.delete()
-    const response = await axios(url);
-
-    console.log(response);
-  } catch (error) {
-    console.log(error.response);
-  }
-}; 
-
-   useEffect(() => {
-    fetchData()
-     if ($('.select').length > 0) {
-       $('.select').select2({
-         minimumResultsForSearch: -1,
-         width: '100%'
-       });
+ 
+   const [values, setValues] = useState({
+     requisitionId: "",
+     dateOfReq: "",
+     closingDate: "",
+     client: "",
+     role: "",
+     jobType: "",
+     country: "",
+     city: "",
+     state: "",
+     postalCode: "",
+     min: "",
+     max: "",
+     jd: "",
+     resp: "",
+     skills: "",
+     workType: "",
+     elegibleCriteria: "",
+     goodToAdd: "",
+   })
+ 
+   const url = "https://638dd2c84190defdb74e5f41.mockapi.io/Job-Post";
+ 
+   const fetchData = async () => {
+ 
+     try {
+ 
+       // axios.get(), axios.post(),axios.put(), axios.delete()
+ 
+       const response = await axios(url);
+ 
+ 
+ 
+       console.log(response);
+ 
+     } catch (error) {
+ 
+       console.log(error.response);
+ 
      }
-   });
+ 
+   };
+ 
+    useEffect(() => {
+      fetchData()
+      if ($('.select').length > 0) {
+        $('.select').select2({
+          minimumResultsForSearch: -1,
+          width: '100%'
+        });
+      }
+    });
    return (
      <div className="page-wrapper">
        <Helmet>
@@ -55,20 +79,20 @@ import React, { useEffect } from 'react';
                <div className="row">
                  <div className="col-sm-4">
                    <div className="form-group">
-                     <label>Requisition ID<span className="text-danger">*</span></label>
-                     <input className="form-control" type="text" />
+                     <label>Requisition ID<span className="text-danger" >*</span></label>
+                     <input name="requisitionId" value={values.requisitionId} className="form-control" type="text" />
                    </div>
                  </div>
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Date of Requisition</label>
-                     <input className="form-control " type="date" />
+                     <input name="dateOfReq" value={values.dateOfReq} className="form-control " type="date" />
                    </div>
                  </div>
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Closing Date</label>
-                     <input className="form-control " type="date" />
+                     <input name="closingDate" value={values.closingDate} className="form-control " type="date" />
                    </div>
                  </div>
                </div>
@@ -76,19 +100,19 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Client<span className="text-danger">*</span></label>
-                     <input className="form-control" type="text" />
+                     <input name="client" value={values.client} className="form-control" type="text" />
                    </div>
                  </div>
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Role / Job Title</label>
-                     <input className="form-control " type="text" />
+                     <input name="role" value={values.role} className="form-control " type="text" />
                    </div>
                  </div>
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Job Type</label>
-                     <input className="form-control " type="text" />
+                     <input name="jobType" value={values.jobType} className="form-control " type="text" />
                    </div>
                  </div>
                </div>
@@ -96,7 +120,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-6 col-md-6 col-lg-3">
                    <div className="form-group">
                      <label>Country</label>
-                     <select className="form-control select">
+                     <select name="country" value={values.country} className="form-control select">
                        <option>India</option>
                        <option>USA</option>
                      </select>
@@ -105,7 +129,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-6 col-md-6 col-lg-3">
                    <div className="form-group">
                      <label>City</label>
-                     <select className="form-control select">
+                     <select name="city" value={values.city} className="form-control select">
                        <option>Chennai</option>
                        <option>Bangalore</option>
                      </select>
@@ -114,7 +138,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-6 col-md-6 col-lg-3">
                    <div className="form-group">
                      <label>State/Province</label>
-                     <select className="form-control select">
+                     <select name="state" value={values.state} className="form-control select">
                        <option>Tamil Nadu</option>
                        <option>Karnataka</option>
                      </select>
@@ -123,7 +147,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-6 col-md-6 col-lg-3">
                    <div className="form-group">
                      <label>Postal Code</label>
-                     <input className="form-control" type="text"/>
+                     <input name="postalCode" value={values.postalCode} className="form-control" type="text" />
                    </div>
                  </div>
                </div>
@@ -132,13 +156,13 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-6">
                    <div className="form-group">
                      <label>Min</label>
-                     <input className="form-control" defaultValue="danielporter@example.com" type="number" />
+                     <input name="min" value={values.min} className="form-control" defaultValue="danielporter@example.com" type="number" />
                    </div>
                  </div>
                  <div className="col-sm-6">
                    <div className="form-group">
                      <label>Max</label>
-                     <input className="form-control" type="number" />
+                     <input name="max" value={values.max} className="form-control" type="number" />
                    </div>
                  </div>
                </div>
@@ -146,7 +170,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-12">
                    <div className="form-group">
                      <label>Job Description</label>
-                     <textarea className="form-control" type="text" />
+                     <textarea name="jd" value={values.jd} className="form-control" type="text" />
                    </div>
                  </div>
                </div>
@@ -154,7 +178,7 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-12">
                    <div className="form-group">
                      <label>Roles & Responsibilities</label>
-                     <textarea className="form-control" type="text" />
+                     <textarea name="resp" value={values.resp} className="form-control" type="text" />
                    </div>
                  </div>
                </div>
@@ -162,15 +186,15 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-12">
                    <div className="form-group">
                      <label>Desired skills</label>
-                     <textarea className="form-control" type="text" />
+                     <textarea name="skills" value={values.skills} className="form-control" type="text" />
                    </div>
                  </div>
                </div>
                <div className="row">
                  <div className="col-sm-4">
-                 <div className="form-group">
+                   <div className="form-group">
                      <label>Work Type</label>
-                     <select className="form-control select">
+                     <select name="workType" value={values.workType} className="form-control select">
                        <option>From Office</option>
                        <option>WFM</option>
                        <option>Hybrid</option>
@@ -180,13 +204,13 @@ import React, { useEffect } from 'react';
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Elegible Criteria</label>
-                     <input className="form-control " type="text" />
+                     <input name="elegibleCriteria" value={values.elegibleCriteria} className="form-control " type="text" />
                    </div>
                  </div>
                  <div className="col-sm-4">
                    <div className="form-group">
                      <label>Good to add</label>
-                     <input className="form-control " type="text" />
+                     <input name="goodToAdd" value={values.goodToAdd} className="form-control " type="text" />
                    </div>
                  </div>
                </div>
