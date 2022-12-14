@@ -31,7 +31,8 @@ import Visitedjobs from "./Jobs/visited_jobs"
 import Archivedjobs from "./Jobs/archived_jobs"
 import Jobapptitude from "./Jobs/job_aptitude"
 import Questions from "./Jobs/questions"
-import Requisition from "./Jobs/Requisition"
+import Requisition from "./Jobs/requisition"
+import CreateRequisition from './Jobs/create-requisition';
 
 
 const Uiinterfaceroute = ({ match }) => (
@@ -65,6 +66,7 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/job-aptitude`} component={Jobapptitude} />
         <Route path={`${match.url}/questions`} component={Questions} />
         <Route path={`${match.url}/requisition`} component={Requisition}/>
+        <Route path={`${match.url}/create-requisition`} component={CreateRequisition}/>
     </Switch>
 );
 
