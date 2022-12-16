@@ -281,7 +281,7 @@ input[type=password] {
 
 textarea.form-control {
 	resize: vertical;
-	min-height: calc(1.5em + 4rem + 2px);
+	height:200px;
 }
 
 .navbar-nav>li {
@@ -6852,7 +6852,7 @@ table.table-inbox tbody tr.checked {
 	margin-bottom: 5px;
 }
 
-.job-info .job-dept {
+.job-info .job-client {
 	color: #737882;
 	display: block;
 	font-size: 16px;

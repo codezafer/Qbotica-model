@@ -3,31 +3,40 @@
 import React, { useState,useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import { Table } from 'antd';
 import 'antd/dist/antd.css';
 import {itemRender,onShowSizeChange} from "../../paginationfunction"
 import "../../antdstyle.css"
+// import profile from '../../../../data/db.json'
 
 const Requisition = () => {
-
+  
   const [data, setData] = useState([
-    {id:1,jobtitle:"Web Designer",department:"Development",startdate:"1 Jan 2013",expirydate:"31 May 2019",jobtype:"Full Time",status:"Open",applicants:"3 Candidates"},
+    {id:'1',jobtitle:"Web Designer",department:"Development",startdate:"1 Jan 2013",expirydate:"31 May 2019",jobtype:"Full Time",status:"Open",applicants:"3 Candidates"},
     // {id:2,jobtitle:"Web Developer",department:"Designing",startdate:"18 Mar 2014",expirydate:"31 May 2019",jobtype:"Part Time",status:"Closed",applicants:"2 Candidates"},
     // {id:3,jobtitle:"Android Developer",department:"Android",startdate:"1 Apr 2014",expirydate:"31 May 2019",jobtype:"Internship",status:"Cancelled",applicants:"1 Candidates"},
   ]);
+  
   useEffect( ()=>{
+    // axios.get("http://localhost:9000/requisition")
+    // .then((getData) =>{
+    //   setData(getData.data);
+    // })
     if($('.select').length > 0) {
       $('.select').select2({
         minimumResultsForSearch: -1,
         width: '100%'
       });
     }
-  });  
+  },[]);  
 
+// {values.map((details)=>(
+//     console.log(details.values)
+//   ))}
     const columns = [
       {
-        title: '#',
+        title: 'id',
         dataIndex: 'id',
           sorter: (a, b) => a.id.length - b.id.length,
       },
@@ -115,6 +124,7 @@ const Requisition = () => {
             </div>
           ),
       }
+  
     ]
       return ( 
         <div className="page-wrapper">
