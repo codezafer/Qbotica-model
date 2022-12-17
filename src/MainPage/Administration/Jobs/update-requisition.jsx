@@ -30,7 +30,7 @@ const UpdateRequisition = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:9000/requisition")
+    axios.get("http://localhost:9000/requisition?id=5")
     .then((getData) =>{
       setValues(getData.data);
       console.log(getData)

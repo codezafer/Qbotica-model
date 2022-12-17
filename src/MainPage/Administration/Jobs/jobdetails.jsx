@@ -46,7 +46,7 @@ const Jobdetails = () => {
             <div className="col-sm-12">
               <h3 className="page-title">Job Details</h3>
               <ul className="breadcrumb">
-                {/* <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li> */}
+                <li className="breadcrumb-item"><Link to="/app/main/"></Link></li>
                 <li  className="breadcrumb-item active">Job Details</li>
               </ul>
             </div>

@@ -12,37 +12,42 @@ import "../../antdstyle.css"
 
 const Requisition = () => {
   
-  const [data, setData] = useState([
-    {id:'1',jobtitle:"Web Designer",department:"Development",startdate:"1 Jan 2013",expirydate:"31 May 2019",jobtype:"Full Time",status:"Open",applicants:"3 Candidates"},
+  const [values, setValues] = useState([
+    // {id:'1',jobtitle:"Web Designer",department:"Development",startdate:"1 Jan 2013",expirydate:"31 May 2019",jobtype:"Full Time",status:"Open",applicants:"3 Candidates"},
     // {id:2,jobtitle:"Web Developer",department:"Designing",startdate:"18 Mar 2014",expirydate:"31 May 2019",jobtype:"Part Time",status:"Closed",applicants:"2 Candidates"},
     // {id:3,jobtitle:"Android Developer",department:"Android",startdate:"1 Apr 2014",expirydate:"31 May 2019",jobtype:"Internship",status:"Cancelled",applicants:"1 Candidates"},
   ]);
   
   useEffect( ()=>{
-    // axios.get("http://localhost:9000/requisition")
-    // .then((getData) =>{
-    //   setData(getData.data);
-    // })
-    if($('.select').length > 0) {
-      $('.select').select2({
-        minimumResultsForSearch: -1,
-        width: '100%'
-      });
-    }
+    loadData()
   },[]);  
 
-// {values.map((details)=>(
-//     console.log(details.values)
-//   ))}
+    const loadData =async() =>{
+      const response = await axios.get("http://localhost:9000/requisition")
+       setValues(response.data);
+    }
+
+    const dataWithDetails = values.map((details) =>({
+      ...details,
+      key: details.id,
+      id:details.values.requisitionId,
+      role: details.values.role,
+      client: details.values.client,
+      dateOfReq:details.values.dateOfReq,
+      closingDate:details.values.closingDate,
+      jobType:details.values.jobType
+    }))
+    console.log(dataWithDetails)
     const columns = [
       {
-        title: 'id',
-        dataIndex: 'id',
-          sorter: (a, b) => a.id.length - b.id.length,
+        title: "id",
+        dataIndex: "id",
+        sorter: (a, b) => a.id.length - b.id.length,
       },
       {
-        title: 'Job Title',
-        dataIndex: 'jobtitle',
+        title: "Role",
+        dataIndex: 'role',
+        editTable: true,
         render: (text, record) => (            
             <Link to="/app/administrator/job-details">{text}</Link>
           ), 
@@ -50,68 +55,61 @@ const Requisition = () => {
       },
     
       {
-        title: 'Department',
-        dataIndex: 'department',
+        title: 'Client',
+        dataIndex: 'client',
         sorter: (a, b) => a.department.length - b.department.length,
       },
       {
         title: 'Start Date',
-        dataIndex: 'startdate',
+        dataIndex: 'dateOfReq',
         sorter: (a, b) => a.startdate.length - b.startdate.length,
       },
     
       {
         title: 'Expiry Date',
-        dataIndex: 'expirydate',
+        dataIndex: 'closingDate',
         sorter: (a, b) => a.expirydate.length - b.expirydate.length,
       },
       {
         title: 'Job Type',
-        dataIndex: 'jobtype',
-        render: (text, record) => (
-          <div className="dropdown action-label text-center">
-            <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className={text==="Full Time" ? "fa fa-dot-circle-o text-info" : text==="Part Time" ?
-               "fa fa-dot-circle-o text-success" : text==="Internship" ? "fa fa-dot-circle-o text-danger" : 
-                "fa fa-dot-circle-o text-danger" } /> {text}
-            </a>
-            <div className="dropdown-menu dropdown-menu-right">
-              <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Full Time</a>
-              <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Part Time</a>
-              <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Internship</a>
-              <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Temporary</a>
-              <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Other</a>
-            </div>
-        </div>
-          ),
+        dataIndex: 'jobType',
+        // render: (text, record) => (
+        //   <div className="dropdown action-label text-center">
+        //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        //       <i className={text==="Full Time" ? "fa fa-dot-circle-o text-info" : text==="Part Time" ?
+        //        "fa fa-dot-circle-o text-success" : text==="Internship" ? "fa fa-dot-circle-o text-danger" : 
+        //         "fa fa-dot-circle-o text-danger" } /> {text}
+        //     </a>
+        //     <div className="dropdown-menu dropdown-menu-right">
+        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Full Time</a>
+        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Part Time</a>
+        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Internship</a>
+        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Temporary</a>
+        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Other</a>
+        //     </div>
+        // </div>
+        //   ),
         sorter: (a, b) => a.jobtype.length - b.jobtype.length,
       },
-      {
-        title: 'Status',
-        dataIndex: 'status',
-        render: (text, record) => (
-          <div className="dropdown action-label text-center">
-          <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <i className={text==="Open" ? "fa fa-dot-circle-o text-info" : text==="Closed" ?
-               "fa fa-dot-circle-o text-success" : "fa fa-dot-circle-o text-danger" } /> {text}
-          </a>
-          <div className="dropdown-menu dropdown-menu-right">
-            <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Open</a>
-            <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Closed</a>
-            <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Cancelled</a>
-          </div>
-        </div>
-          ),
-        sorter: (a, b) => a.status.length - b.status.length,
-      },
-      {
-        title: 'Applicants',
-        dataIndex: 'applicants',
-        render: (text, record) => (
-          <Link to="/app/administrator/job-applicants" className="btn btn-sm btn-primary">{text}</Link>
-          ),
-        sorter: (a, b) => a.applicants.length - b.applicants.length,
-      },
+      // {
+      //   title: 'Status',
+      //   dataIndex: 'status',
+      //   render: (text, record) => (
+      //     <div className="dropdown action-label text-center">
+      //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+      //       <i className={text==="Open" ? "fa fa-dot-circle-o text-info" : text==="Closed" ?
+      //          "fa fa-dot-circle-o text-success" : "fa fa-dot-circle-o text-danger" } /> {text}
+      //     </a>
+      //     <div className="dropdown-menu dropdown-menu-right">
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Open</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Closed</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Cancelled</a>
+      //     </div>
+      //   </div>
+      //     ),
+      //   sorter: (a, b) => a.status.length - b.status.length,
+      // },
+     
       {
         title: 'Action',
         render: (text, record) => (
@@ -154,14 +152,14 @@ const Requisition = () => {
           <div className="col-md-12">
             <div className="table-responsive">
                 <Table className="table-striped"
-                    pagination= { {total : data.length,
+                    pagination= { {total : dataWithDetails.length,
                       showTotal : (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} entries`,
                       showSizeChanger : true,onShowSizeChange: onShowSizeChange ,itemRender : itemRender } }
                     style = {{overflowX : 'auto'}}
                     columns={columns}                 
-                    // bordered
-                    dataSource={data}
-                    rowKey={record => record.id}
+                    bordered
+                    dataSource={dataWithDetails}
+                    // rowKey={record => record.id}
                     // onChange={this.handleTableChange}
                   />
             </div>
@@ -170,7 +168,7 @@ const Requisition = () => {
       </div>
       {/* /Page Content */}
       {/* Add Job Modal */}
-      <div id="add_job" className="modal custom-modal fade" role="dialog">
+      {/* <div id="add_job" className="modal custom-modal fade" role="dialog">
         <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -299,10 +297,10 @@ const Requisition = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* /Add Job Modal */}
       {/* Edit Job Modal */}
-      <div id="edit_job" className="modal custom-modal fade" role="dialog">
+      {/* <div id="edit_job" className="modal custom-modal fade" role="dialog">
         <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
           <button type="button" className="close" data-bs-dismiss="modal">×</button>
           <div className="modal-content">
@@ -432,7 +430,7 @@ const Requisition = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* /Edit Job Modal */}
       {/* Delete Job Modal */}
       <div className="modal custom-modal fade" id="delete_job" role="dialog">
