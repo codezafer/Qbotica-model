@@ -1,135 +1,160 @@
 //requisition
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { Table } from 'antd';
-import 'antd/dist/antd.css';
-import {itemRender,onShowSizeChange} from "../../paginationfunction"
-import "../../antdstyle.css"
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Table, Popconfirm } from "antd";
+import { DeleteTwoTone } from '@ant-design/icons';
+import "antd/dist/antd.css";
+import { itemRender, onShowSizeChange } from "../../paginationfunction";
+import "../../antdstyle.css";
 // import profile from '../../../../data/db.json'
 
 const Requisition = () => {
-  
-  const [values, setValues] = useState([
-    // {id:'1',jobtitle:"Web Designer",department:"Development",startdate:"1 Jan 2013",expirydate:"31 May 2019",jobtype:"Full Time",status:"Open",applicants:"3 Candidates"},
-    // {id:2,jobtitle:"Web Developer",department:"Designing",startdate:"18 Mar 2014",expirydate:"31 May 2019",jobtype:"Part Time",status:"Closed",applicants:"2 Candidates"},
-    // {id:3,jobtitle:"Android Developer",department:"Android",startdate:"1 Apr 2014",expirydate:"31 May 2019",jobtype:"Internship",status:"Cancelled",applicants:"1 Candidates"},
-  ]);
-  
-  useEffect( ()=>{
-    loadData()
-  },[]);  
+  const [values, setValues] = useState([]);
 
-    const loadData =async() =>{
-      const response = await axios.get("http://localhost:9000/requisition")
-       setValues(response.data);
-    }
+  useEffect(() => {
+    loadData();
+  }, []);
 
-    const dataWithDetails = values.map((details) =>({
-      ...details,
-      key: details.id,
-      id:details.values.requisitionId,
-      role: details.values.role,
-      client: details.values.client,
-      dateOfReq:details.values.dateOfReq,
-      closingDate:details.values.closingDate,
-      jobType:details.values.jobType
-    }))
-    console.log(dataWithDetails)
-    const columns = [
-      {
-        title: "id",
-        dataIndex: "id",
-        sorter: (a, b) => a.id.length - b.id.length,
-      },
-      {
-        title: "Role",
-        dataIndex: 'role',
-        editTable: true,
-        render: (text, record) => (            
-            <Link to="/app/administrator/job-details">{text}</Link>
-          ), 
-          sorter: (a, b) => a.jobtitle.length - b.jobtitle.length,
-      },
-    
-      {
-        title: 'Client',
-        dataIndex: 'client',
-        sorter: (a, b) => a.department.length - b.department.length,
-      },
-      {
-        title: 'Start Date',
-        dataIndex: 'dateOfReq',
-        sorter: (a, b) => a.startdate.length - b.startdate.length,
-      },
-    
-      {
-        title: 'Expiry Date',
-        dataIndex: 'closingDate',
-        sorter: (a, b) => a.expirydate.length - b.expirydate.length,
-      },
-      {
-        title: 'Job Type',
-        dataIndex: 'jobType',
-        // render: (text, record) => (
-        //   <div className="dropdown action-label text-center">
-        //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-        //       <i className={text==="Full Time" ? "fa fa-dot-circle-o text-info" : text==="Part Time" ?
-        //        "fa fa-dot-circle-o text-success" : text==="Internship" ? "fa fa-dot-circle-o text-danger" : 
-        //         "fa fa-dot-circle-o text-danger" } /> {text}
-        //     </a>
-        //     <div className="dropdown-menu dropdown-menu-right">
-        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Full Time</a>
-        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Part Time</a>
-        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Internship</a>
-        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Temporary</a>
-        //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Other</a>
-        //     </div>
-        // </div>
-        //   ),
-        sorter: (a, b) => a.jobtype.length - b.jobtype.length,
-      },
-      // {
-      //   title: 'Status',
-      //   dataIndex: 'status',
-      //   render: (text, record) => (
-      //     <div className="dropdown action-label text-center">
+  const loadData = async () => {
+    const response = await axios.get("http://localhost:9000/requisition");
+    setValues(response.data);
+  };
+
+  const dataWithDetails = values.map((details) => ({
+    ...details,
+    key: details.id,
+    id: details.id,
+    role: details.values.role,
+    client: details.values.client,
+    dateOfReq: details.values.dateOfReq,
+    closingDate: details.values.closingDate,
+    jobType: details.values.jobType,
+  }));
+
+  // const handleDelete = (value) => {
+  //   const dataSource = [...dataWithDetails];
+  //   const filteredData = dataSource.filter((item) => item.id !== value.id);
+  //   setValues(filteredData);
+  // };
+
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:9000/requisition/${id}`);
+    // const dataSource = [...dataWithDetails];
+    const filteredData = values.filter((value) => {
+    return value.id !== id 
+  });
+    setValues(filteredData);
+  };
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      sorter: (a, b) => a.id.length - b.id.length,
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      editTable: true,
+      render: (text, record) => (
+        <Link to="/app/administrator/job-details">{text}</Link>
+      ),
+      sorter: (a, b) => a.role.length - b.role.length,
+    },
+
+    {
+      title: "Client",
+      dataIndex: "client",
+      sorter: (a, b) => a.client.length - b.client.length,
+    },
+    {
+      title: "Start Date",
+      dataIndex: "dateOfReq",
+      sorter: (a, b) => a.dateOfReq.length - b.dateOfReq.length,
+    },
+
+    {
+      title: "Expiry Date",
+      dataIndex: "closingDate",
+      sorter: (a, b) => a.closingDate.length - b.closingDate.length,
+    },
+    {
+      title: "Job Type",
+      dataIndex: "jobType",
+      // render: (text, record) => (
+      //   <div className="dropdown action-label text-center">
       //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-      //       <i className={text==="Open" ? "fa fa-dot-circle-o text-info" : text==="Closed" ?
-      //          "fa fa-dot-circle-o text-success" : "fa fa-dot-circle-o text-danger" } /> {text}
+      //       <i className={text==="Full Time" ? "fa fa-dot-circle-o text-info" : text==="Part Time" ?
+      //        "fa fa-dot-circle-o text-success" : text==="Internship" ? "fa fa-dot-circle-o text-danger" :
+      //         "fa fa-dot-circle-o text-danger" } /> {text}
       //     </a>
       //     <div className="dropdown-menu dropdown-menu-right">
-      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Open</a>
-      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Closed</a>
-      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Cancelled</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Full Time</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Part Time</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Internship</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Temporary</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Other</a>
       //     </div>
-      //   </div>
-      //     ),
-      //   sorter: (a, b) => a.status.length - b.status.length,
-      // },
-     
-      {
-        title: 'Action',
-        render: (text, record) => (
-            <div className="dropdown dropdown-action text-end">
-              <a href="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-              <div className="dropdown-menu dropdown-menu-right">
-                <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_job"><i className="fa fa-pencil m-r-5" /> Edit</a>
-                <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete_job"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-              </div>
-            </div>
-          ),
-      }
-  
-    ]
-      return ( 
-        <div className="page-wrapper">
-        <Helmet>
-            <title>Requisition - qBotica</title>
-            <meta name="description" content="Login page"/>					
-        </Helmet>
+      // </div>
+      //   ),
+      sorter: (a, b) => a.jobType.length - b.jobType.length,
+    },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'status',
+    //   render: (text, record) => (
+    //     <div className="dropdown action-label text-center">
+    //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+    //       <i className={text==="Open" ? "fa fa-dot-circle-o text-info" : text==="Closed" ?
+    //          "fa fa-dot-circle-o text-success" : "fa fa-dot-circle-o text-danger" } /> {text}
+    //     </a>
+    //     <div className="dropdown-menu dropdown-menu-right">
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Open</a>
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Closed</a>
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Cancelled</a>
+    //     </div>
+    //   </div>
+    //     ),
+    //   sorter: (a, b) => a.status.length - b.status.length,
+    // },
+
+    {
+      title: "Action",
+      dataIndex:"Action",
+      align:"centre",
+      // render: (_, record) =>
+      //   dataWithDetails.length >= 1 ? (
+      //     // <div className="dropdown dropdown-action text-end">
+      //     //   <a href="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
+      //     //   <div className="dropdown-menu dropdown-menu-right">
+      //     // {/* <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_job"><i className="fa fa-pencil m-r-5" /> Edit</a> */}
+      //     //     <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete_job"><i className="fa fa-trash-o m-r-5" onSubmit={()=>handleDelete(record)} /> Delete</a>
+      //     //   </div>
+      //     // </div>
+      //     <Popconfirm
+      //       title="Are you sure want to delete ?"
+      //       onConfirm={() => deleteUser(record)}> 
+      //       <DeleteTwoTone />
+      //       </Popconfirm>
+      //   ) : null,
+      render: (props) => (
+        <Popconfirm
+            title="Are you sure want to delete ?"
+            onConfirm={() => deleteUser(props)}> 
+            <DeleteTwoTone />
+            </Popconfirm>
+      )
+    },
+  ];
+  return (
+    <div className="page-wrapper">
+      <Helmet>
+        <title>Requisition - qBotica</title>
+        <meta name="description" content="Login page" />
+      </Helmet>
       {/* Page Content */}
       <div className="content container-fluid">
         {/* Page Header */}
@@ -138,12 +163,20 @@ const Requisition = () => {
             <div className="col">
               <h3 className="page-title">Requisition</h3>
               <ul className="breadcrumb">
-                <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
+                <li className="breadcrumb-item">
+                  <Link to="/app/main/dashboard">Dashboard</Link>
+                </li>
                 <li className="breadcrumb-item active">Requisition</li>
               </ul>
             </div>
             <div className="col-auto float-end ml-auto">
-              <Link to="/app/administrator/create-requisition" className="btn add-btn"><i className="fa fa-plus" />Create</Link>
+              <Link
+                to="/app/administrator/create-requisition"
+                className="btn add-btn"
+              >
+                <i className="fa fa-plus" />
+                Create
+              </Link>
             </div>
           </div>
         </div>
@@ -151,17 +184,23 @@ const Requisition = () => {
         <div className="row">
           <div className="col-md-12">
             <div className="table-responsive">
-                <Table className="table-striped"
-                    pagination= { {total : dataWithDetails.length,
-                      showTotal : (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                      showSizeChanger : true,onShowSizeChange: onShowSizeChange ,itemRender : itemRender } }
-                    style = {{overflowX : 'auto'}}
-                    columns={columns}                 
-                    bordered
-                    dataSource={dataWithDetails}
-                    // rowKey={record => record.id}
-                    // onChange={this.handleTableChange}
-                  />
+              <Table
+                className="table-striped"
+                pagination={{
+                  total: dataWithDetails.length,
+                  showTotal: (total, range) =>
+                    `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                  showSizeChanger: true,
+                  onShowSizeChange: onShowSizeChange,
+                  itemRender: itemRender,
+                }}
+                style={{ overflowX: "auto" }}
+                columns={columns}
+                bordered
+                dataSource={dataWithDetails}
+                // rowKey={record => record.id}
+                // onChange={this.handleTableChange}
+              />
             </div>
           </div>
         </div>
@@ -433,7 +472,7 @@ const Requisition = () => {
       </div> */}
       {/* /Edit Job Modal */}
       {/* Delete Job Modal */}
-      <div className="modal custom-modal fade" id="delete_job" role="dialog">
+      {/* <div className="modal custom-modal fade" id="delete_job" role="dialog">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-body">
@@ -444,7 +483,7 @@ const Requisition = () => {
               <div className="modal-btn delete-action">
                 <div className="row">
                   <div className="col-6">
-                    <a href="" className="btn btn-primary continue-btn">Delete</a>
+                    <a href="" className="btn btn-primary continue-btn" >Delete</a>
                   </div>
                   <div className="col-6">
                     <a href="" data-bs-dismiss="modal" className="btn btn-primary cancel-btn">Cancel</a>
@@ -454,10 +493,10 @@ const Requisition = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* /Delete Job Modal */}
     </div>
-      );
-}
+  );
+};
 
 export default Requisition;

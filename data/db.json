@@ -2,29 +2,6 @@
   "requisition": [
     {
       "values": {
-        "requisitionId": "1",
-        "dateOfReq": "2022-12-14",
-        "closingDate": "2022-12-29",
-        "client": "msk",
-        "role": "react",
-        "jobType": "full time",
-        "country": "USA",
-        "city": "Bangalore",
-        "state": "Tamil Nadu",
-        "postalCode": "60135",
-        "min": "100000",
-        "max": "10000000",
-        "jd": "gffff",
-        "resp": "gfff",
-        "skills": "gfff",
-        "workType": "WFM",
-        "elegibleCriteria": "asdf",
-        "goodToAdd": "asdf"
-      },
-      "id": 1
-    },
-    {
-      "values": {
         "requisitionId": "",
         "dateOfReq": "",
         "closingDate": "",
@@ -68,29 +45,6 @@
         "goodToAdd": ""
       },
       "id": 3
-    },
-    {
-      "values": {
-        "requisitionId": "123",
-        "dateOfReq": "",
-        "closingDate": "",
-        "client": "",
-        "role": "",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 4
     },
     {
       "values": {

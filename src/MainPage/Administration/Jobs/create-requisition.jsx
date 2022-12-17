@@ -29,7 +29,7 @@ const CreateRequisition = () => {
     goodToAdd: '',
   })
 
-
+  
 
   async function requisitionApi() {
     const url = "http://localhost:9000/requisition";
