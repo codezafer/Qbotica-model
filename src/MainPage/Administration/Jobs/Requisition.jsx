@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Table, Popconfirm } from "antd";
-import { DeleteTwoTone } from '@ant-design/icons';
+import { Table, Popconfirm, Space } from "antd";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
+import { resolveOnChange } from "antd/lib/input/Input";
 // import profile from '../../../../data/db.json'
 
 const Requisition = () => {
@@ -18,8 +19,10 @@ const Requisition = () => {
     loadData();
   }, []);
 
+  const url = "http://localhost:9000/requisition";
+
   const loadData = async () => {
-    const response = await axios.get("http://localhost:9000/requisition");
+    const response = await axios.get(url);
     setValues(response.data);
   };
 
@@ -34,33 +37,27 @@ const Requisition = () => {
     jobType: details.values.jobType,
   }));
 
-  // const handleDelete = (value) => {
-  //   const dataSource = [...dataWithDetails];
-  //   const filteredData = dataSource.filter((item) => item.id !== value.id);
-  //   setValues(filteredData);
-  // };
-
-  const deleteUser = async (id) => {
+  const handleDelete = async (id) => {
     await axios.delete(`http://localhost:9000/requisition/${id}`);
-    // const dataSource = [...dataWithDetails];
-    const filteredData = values.filter((value) => {
-    return value.id !== id 
-  });
-    setValues(filteredData);
+    // const filteredData = values.filter(item => item.id !== id);
+    // setValues(filteredData);
+    loadData();
   };
 
   const columns = [
     {
       title: "Id",
       dataIndex: "id",
+      align: "center",
       sorter: (a, b) => a.id.length - b.id.length,
     },
     {
       title: "Role",
       dataIndex: "role",
       editTable: true,
-      render: (text, record) => (
-        <Link to="/app/administrator/job-details">{text}</Link>
+      align: "center",
+      render: (_,record) => (
+        <Link to={`/app/administrator/job-details/${record.id}`} >{record.role}</Link>
       ),
       sorter: (a, b) => a.role.length - b.role.length,
     },
@@ -68,22 +65,26 @@ const Requisition = () => {
     {
       title: "Client",
       dataIndex: "client",
+      align: "center",
       sorter: (a, b) => a.client.length - b.client.length,
     },
     {
       title: "Start Date",
       dataIndex: "dateOfReq",
+      align: "center",
       sorter: (a, b) => a.dateOfReq.length - b.dateOfReq.length,
     },
 
     {
       title: "Expiry Date",
       dataIndex: "closingDate",
+      align: "center",
       sorter: (a, b) => a.closingDate.length - b.closingDate.length,
     },
     {
       title: "Job Type",
       dataIndex: "jobType",
+      align: "center",
       // render: (text, record) => (
       //   <div className="dropdown action-label text-center">
       //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -123,30 +124,21 @@ const Requisition = () => {
 
     {
       title: "Action",
-      dataIndex:"Action",
-      align:"centre",
-      // render: (_, record) =>
-      //   dataWithDetails.length >= 1 ? (
-      //     // <div className="dropdown dropdown-action text-end">
-      //     //   <a href="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-      //     //   <div className="dropdown-menu dropdown-menu-right">
-      //     // {/* <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_job"><i className="fa fa-pencil m-r-5" /> Edit</a> */}
-      //     //     <a href="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete_job"><i className="fa fa-trash-o m-r-5" onSubmit={()=>handleDelete(record)} /> Delete</a>
-      //     //   </div>
-      //     // </div>
-      //     <Popconfirm
-      //       title="Are you sure want to delete ?"
-      //       onConfirm={() => deleteUser(record)}> 
-      //       <DeleteTwoTone />
-      //       </Popconfirm>
-      //   ) : null,
-      render: (props) => (
-        <Popconfirm
+      dataIndex: "action",
+      align: "center",
+      render: (_, record) => (
+        <Space>
+          <Popconfirm
             title="Are you sure want to delete ?"
-            onConfirm={() => deleteUser(props)}> 
+            onConfirm={() => handleDelete(record.id)}
+          >
             <DeleteTwoTone />
-            </Popconfirm>
-      )
+          </Popconfirm>
+          <Link to="/app/administrator/update-requisition">
+            <EditTwoTone />
+          </Link>
+        </Space>
+      ),
     },
   ];
   return (
@@ -198,6 +190,7 @@ const Requisition = () => {
                 columns={columns}
                 bordered
                 dataSource={dataWithDetails}
+
                 // rowKey={record => record.id}
                 // onChange={this.handleTableChange}
               />
@@ -471,30 +464,6 @@ const Requisition = () => {
         </div>
       </div> */}
       {/* /Edit Job Modal */}
-      {/* Delete Job Modal */}
-      {/* <div className="modal custom-modal fade" id="delete_job" role="dialog">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-body">
-              <div className="form-header">
-                <h3>Delete Job</h3>
-                <p>Are you sure want to delete?</p>
-              </div>
-              <div className="modal-btn delete-action">
-                <div className="row">
-                  <div className="col-6">
-                    <a href="" className="btn btn-primary continue-btn" >Delete</a>
-                  </div>
-                  <div className="col-6">
-                    <a href="" data-bs-dismiss="modal" className="btn btn-primary cancel-btn">Cancel</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* /Delete Job Modal */}
     </div>
   );
 };

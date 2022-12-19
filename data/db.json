@@ -2,52 +2,6 @@
   "requisition": [
     {
       "values": {
-        "requisitionId": "",
-        "dateOfReq": "",
-        "closingDate": "",
-        "client": "",
-        "role": "React Developer",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 2
-    },
-    {
-      "values": {
-        "requisitionId": "",
-        "dateOfReq": "",
-        "closingDate": "",
-        "client": "",
-        "role": "React Developer",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 3
-    },
-    {
-      "values": {
         "requisitionId": "1",
         "dateOfReq": "2022-12-15",
         "closingDate": "2022-12-30",
@@ -68,6 +22,52 @@
         "goodToAdd": "Redux, React, javascript, Material Ui, JQueryecmascript"
       },
       "id": 5
+    },
+    {
+      "values": {
+        "requisitionId": "1",
+        "dateOfReq": "2022-12-03",
+        "closingDate": "2022-12-17",
+        "client": "meta",
+        "role": "angular",
+        "jobType": "remote",
+        "country": "USA",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "postalCode": "178963",
+        "min": "10000",
+        "max": "100000000",
+        "jd": "Should have experience in HTML,CSS,Angular JS,Javascript, Jquery",
+        "resp": "Should have experience in HTML,CSS,Angular JS,Javascript, Jquery",
+        "skills": "Should have experience in HTML,CSS,Angular JS,Javascript, Jquery",
+        "workType": "Hybrid",
+        "elegibleCriteria": "5 - 10 years",
+        "goodToAdd": "angular"
+      },
+      "id": 6
+    },
+    {
+      "values": {
+        "requisitionId": "123",
+        "dateOfReq": "",
+        "closingDate": "",
+        "client": "",
+        "role": "",
+        "jobType": "",
+        "country": "",
+        "city": "",
+        "state": "",
+        "postalCode": "",
+        "min": "",
+        "max": "",
+        "jd": "",
+        "resp": "",
+        "skills": "",
+        "workType": "",
+        "elegibleCriteria": "",
+        "goodToAdd": ""
+      },
+      "id": 7
     }
   ]
 }

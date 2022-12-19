@@ -5,7 +5,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
 const Jobdetails = () => {
   const [values, setValues] = useState([]);
@@ -15,14 +15,9 @@ const Jobdetails = () => {
     // const getPosts = async () =>{
     //   const {data : res} = await axios.get(url);
     //   setValues(res);
-    //   console.log(res)
     // };
     // getPosts();
-    axios.get("http://localhost:9000/requisition?id=5")
-    .then((getData) =>{
-      setValues(getData.data);
-      console.log(getData)
-    })
+    getData();
     // if ($(".select").length > 0) {
     //   $(".select").select2({
     //     minimumResultsForSearch: -1,
@@ -30,8 +25,15 @@ const Jobdetails = () => {
     //   });
     // }
   },[]);
-
+ const getData = async () =>{
+  axios.get(`http://localhost:9000/requisition`)
+    .then((getData) =>{
+      setValues(getData.data);
+    })
+  };
+  console.log(useParams())
   return (
+    
     <div className="page-wrapper">
       <Helmet>
         <title>Jobs - qBotica</title>
@@ -46,7 +48,7 @@ const Jobdetails = () => {
             <div className="col-sm-12">
               <h3 className="page-title">Job Details</h3>
               <ul className="breadcrumb">
-                <li className="breadcrumb-item"><Link to="/app/main/"></Link></li>
+                <li className="breadcrumb-item"><Link to="/app/administrator/requisition">Requisition</Link></li>
                 <li  className="breadcrumb-item active">Job Details</li>
               </ul>
             </div>
