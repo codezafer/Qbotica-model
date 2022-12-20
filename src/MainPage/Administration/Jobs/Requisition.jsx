@@ -1,229 +1,472 @@
- import React, { useState, useEffect } from 'react';
- import { Helmet } from "react-helmet";
- import axios, { Axios } from 'axios';
- 
- const Requisition = () => {
- 
-   const [values, setValues] = useState({
-     requisitionId: "",
-     dateOfReq: "",
-     closingDate: "",
-     client: "",
-     role: "",
-     jobType: "",
-     country: "",
-     city: "",
-     state: "",
-     postalCode: "",
-     min: "",
-     max: "",
-     jd: "",
-     resp: "",
-     skills: "",
-     workType: "",
-     elegibleCriteria: "",
-     goodToAdd: "",
-   })
- 
-   const url = "https://638dd2c84190defdb74e5f41.mockapi.io/Job-Post";
- 
-   const fetchData = async () => {
- 
-     try {
- 
-       // axios.get(), axios.post(),axios.put(), axios.delete()
- 
-       const response = await axios(url);
- 
- 
- 
-       console.log(response);
- 
-     } catch (error) {
- 
-       console.log(error.response);
- 
-     }
- 
-   };
- 
-    useEffect(() => {
-      fetchData()
-      if ($('.select').length > 0) {
-        $('.select').select2({
-          minimumResultsForSearch: -1,
-          width: '100%'
-        });
-      }
-    });
-   return (
-     <div className="page-wrapper">
-       <Helmet>
-         <title>Requisition - HRMS Admin Template</title>
-         <meta name="description" content="Login page" />
-       </Helmet>
-       {/* Page Content */}
-       <div className="content container-fluid">
-         <div className="row">
-           <div className="col-md-8 offset-md-2">
-             {/* Page Header */}
-             <div className="page-header">
-               <div className="row">
-                 <div className="col-sm-12">
-                   <h3 className="page-title">Requisition</h3>
-                 </div>
-               </div>
-             </div>
-             {/* /Page Header */}
-             <form>
-               <div className="row">
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Requisition ID<span className="text-danger" >*</span></label>
-                     <input name="requisitionId" value={values.requisitionId} className="form-control" type="text" />
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Date of Requisition</label>
-                     <input name="dateOfReq" value={values.dateOfReq} className="form-control " type="date" />
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Closing Date</label>
-                     <input name="closingDate" value={values.closingDate} className="form-control " type="date" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Client<span className="text-danger">*</span></label>
-                     <input name="client" value={values.client} className="form-control" type="text" />
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Role / Job Title</label>
-                     <input name="role" value={values.role} className="form-control " type="text" />
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Job Type</label>
-                     <input name="jobType" value={values.jobType} className="form-control " type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-6 col-md-6 col-lg-3">
-                   <div className="form-group">
-                     <label>Country</label>
-                     <select name="country" value={values.country} className="form-control select">
-                       <option>India</option>
-                       <option>USA</option>
-                     </select>
-                   </div>
-                 </div>
-                 <div className="col-sm-6 col-md-6 col-lg-3">
-                   <div className="form-group">
-                     <label>City</label>
-                     <select name="city" value={values.city} className="form-control select">
-                       <option>Chennai</option>
-                       <option>Bangalore</option>
-                     </select>
-                   </div>
-                 </div>
-                 <div className="col-sm-6 col-md-6 col-lg-3">
-                   <div className="form-group">
-                     <label>State/Province</label>
-                     <select name="state" value={values.state} className="form-control select">
-                       <option>Tamil Nadu</option>
-                       <option>Karnataka</option>
-                     </select>
-                   </div>
-                 </div>
-                 <div className="col-sm-6 col-md-6 col-lg-3">
-                   <div className="form-group">
-                     <label>Postal Code</label>
-                     <input name="postalCode" value={values.postalCode} className="form-control" type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <p>CTC</p>
-                 <div className="col-sm-6">
-                   <div className="form-group">
-                     <label>Min</label>
-                     <input name="min" value={values.min} className="form-control" defaultValue="danielporter@example.com" type="number" />
-                   </div>
-                 </div>
-                 <div className="col-sm-6">
-                   <div className="form-group">
-                     <label>Max</label>
-                     <input name="max" value={values.max} className="form-control" type="number" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-12">
-                   <div className="form-group">
-                     <label>Job Description</label>
-                     <textarea name="jd" value={values.jd} className="form-control" type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-12">
-                   <div className="form-group">
-                     <label>Roles & Responsibilities</label>
-                     <textarea name="resp" value={values.resp} className="form-control" type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-12">
-                   <div className="form-group">
-                     <label>Desired skills</label>
-                     <textarea name="skills" value={values.skills} className="form-control" type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="row">
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Work Type</label>
-                     <select name="workType" value={values.workType} className="form-control select">
-                       <option>From Office</option>
-                       <option>WFM</option>
-                       <option>Hybrid</option>
-                     </select>
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Elegible Criteria</label>
-                     <input name="elegibleCriteria" value={values.elegibleCriteria} className="form-control " type="text" />
-                   </div>
-                 </div>
-                 <div className="col-sm-4">
-                   <div className="form-group">
-                     <label>Good to add</label>
-                     <input name="goodToAdd" value={values.goodToAdd} className="form-control " type="text" />
-                   </div>
-                 </div>
-               </div>
-               <div className="submit-section">
-                 <button className="btn btn-primary submit-btn">Save</button>
-               </div>
-             </form>
-           </div>
-         </div>
-       </div>
-       {/* /Page Content */}
-     </div>
-   );
- }
- 
- export default Requisition;
+//requisition
+
+import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Table, Popconfirm, Space } from "antd";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import "antd/dist/antd.css";
+import { itemRender, onShowSizeChange } from "../../paginationfunction";
+import "../../antdstyle.css";
+import { resolveOnChange } from "antd/lib/input/Input";
+// import profile from '../../../../data/db.json'
+
+const Requisition = () => {
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const url = "http://localhost:9000/requisition";
+
+  const loadData = async () => {
+    const response = await axios.get(url);
+    setValues(response.data);
+  };
+
+  const dataWithDetails = values.map((details) => ({
+    ...details,
+    key: details.id,
+    id: details.id,
+    role: details.values.role,
+    client: details.values.client,
+    dateOfReq: details.values.dateOfReq,
+    closingDate: details.values.closingDate,
+    jobType: details.values.jobType,
+  }));
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:9000/requisition/${id}`);
+    // const filteredData = values.filter(item => item.id !== id);
+    // setValues(filteredData);
+    // console.log(filteredData)
+    loadData();
+  };
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      align: "center",
+      sorter: (a, b) => a.id.length - b.id.length,
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      editTable: true,
+      align: "center",
+      render: (_,record) => (
+        <Link to={`/app/administrator/job-details/${record.id}`} >{record.role}</Link>
+      ),
+      sorter: (a, b) => a.role.length - b.role.length,
+    },
+
+    {
+      title: "Client",
+      dataIndex: "client",
+      align: "center",
+      sorter: (a, b) => a.client.length - b.client.length,
+    },
+    {
+      title: "Start Date",
+      dataIndex: "dateOfReq",
+      align: "center",
+      sorter: (a, b) => a.dateOfReq.length - b.dateOfReq.length,
+    },
+
+    {
+      title: "Expiry Date",
+      dataIndex: "closingDate",
+      align: "center",
+      sorter: (a, b) => a.closingDate.length - b.closingDate.length,
+    },
+    {
+      title: "Job Type",
+      dataIndex: "jobType",
+      align: "center",
+      // render: (text, record) => (
+      //   <div className="dropdown action-label text-center">
+      //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+      //       <i className={text==="Full Time" ? "fa fa-dot-circle-o text-info" : text==="Part Time" ?
+      //        "fa fa-dot-circle-o text-success" : text==="Internship" ? "fa fa-dot-circle-o text-danger" :
+      //         "fa fa-dot-circle-o text-danger" } /> {text}
+      //     </a>
+      //     <div className="dropdown-menu dropdown-menu-right">
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Full Time</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Part Time</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Internship</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Temporary</a>
+      //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-warning" /> Other</a>
+      //     </div>
+      // </div>
+      //   ),
+      sorter: (a, b) => a.jobType.length - b.jobType.length,
+    },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'status',
+    //   render: (text, record) => (
+    //     <div className="dropdown action-label text-center">
+    //     <a className="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+    //       <i className={text==="Open" ? "fa fa-dot-circle-o text-info" : text==="Closed" ?
+    //          "fa fa-dot-circle-o text-success" : "fa fa-dot-circle-o text-danger" } /> {text}
+    //     </a>
+    //     <div className="dropdown-menu dropdown-menu-right">
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-info" /> Open</a>
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-success" /> Closed</a>
+    //       <a className="dropdown-item" href="#"><i className="fa fa-dot-circle-o text-danger" /> Cancelled</a>
+    //     </div>
+    //   </div>
+    //     ),
+    //   sorter: (a, b) => a.status.length - b.status.length,
+    // },
+
+    {
+      title: "Action",
+      dataIndex: "action",
+      align: "center",
+      render: (_, record) => (
+        <Space>
+          <Popconfirm
+            title="Are you sure want to delete ?"
+            onConfirm={() => handleDelete(record.id)}
+          >
+            <DeleteTwoTone />
+          </Popconfirm>
+          <Link to={`/app/administrator/update-requisition/${record.id}`}>
+            <EditTwoTone />
+          </Link>
+        </Space>
+      ),
+    },
+  ];
+  return (
+    <div className="page-wrapper">
+      <Helmet>
+        <title>Requisition - qBotica</title>
+        <meta name="description" content="Login page" />
+      </Helmet>
+      {/* Page Content */}
+      <div className="content container-fluid">
+        {/* Page Header */}
+        <div className="page-header">
+          <div className="row align-items-center">
+            <div className="col">
+              <h3 className="page-title">Requisition</h3>
+              <ul className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link to="/app/main/dashboard">Dashboard</Link>
+                </li>
+                <li className="breadcrumb-item active">Requisition</li>
+              </ul>
+            </div>
+            <div className="col-auto float-end ml-auto">
+              <Link
+                to="/app/administrator/create-requisition"
+                className="btn add-btn"
+              >
+                <i className="fa fa-plus" />
+                Create
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* /Page Header */}
+        <div className="row">
+          <div className="col-md-12">
+            <div className="table-responsive">
+              <Table
+                className="table-striped"
+                pagination={{
+                  total: dataWithDetails.length,
+                  showTotal: (total, range) =>
+                    `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                  showSizeChanger: true,
+                  onShowSizeChange: onShowSizeChange,
+                  itemRender: itemRender,
+                }}
+                style={{ overflowX: "auto" }}
+                columns={columns}
+                bordered
+                dataSource={dataWithDetails}
+
+                // rowKey={record => record.id}
+                // onChange={this.handleTableChange}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* /Page Content */}
+      {/* Add Job Modal */}
+      {/* <div id="add_job" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Add Job</h5>
+              <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Title</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Department</label>
+                      <select className="select">
+                        <option>-</option>
+                        <option>Web Development</option>
+                        <option>Application Development</option>
+                        <option>IT Management</option>
+                        <option>Accounts Management</option>
+                        <option>Support Management</option>
+                        <option>Marketing</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Location</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>No of Vacancies</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Experience</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Age</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary From</label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary To</label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Type</label>
+                      <select className="select">
+                        <option>Full Time</option>
+                        <option>Part Time</option>
+                        <option>Internship</option>
+                        <option>Temporary</option>
+                        <option>Remote</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Status</label>
+                      <select className="select">
+                        <option>Open</option>
+                        <option>Closed</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Start Date</label>
+                      <input type="text" className="form-control datetimepicker" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Expired Date</label>
+                      <input type="text" className="form-control datetimepicker" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea className="form-control" defaultValue={""} />
+                    </div>
+                  </div>
+                </div>
+                <div className="submit-section">
+                  <button className="btn btn-primary submit-btn">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/* /Add Job Modal */}
+      {/* Edit Job Modal */}
+      {/* <div id="edit_job" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <button type="button" className="close" data-bs-dismiss="modal">×</button>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Edit Job</h5>
+              <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Title</label>
+                      <input className="form-control" type="text" defaultValue="Web Developer" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Department</label>
+                      <select className="select">
+                        <option>-</option>
+                        <option >Web Development</option>
+                        <option>Application Development</option>
+                        <option>IT Management</option>
+                        <option>Accounts Management</option>
+                        <option>Support Management</option>
+                        <option>Marketing</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Location</label>
+                      <input className="form-control" type="text" defaultValue="California" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>No of Vacancies</label>
+                      <input className="form-control" type="text" defaultValue={5} />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Experience</label>
+                      <input className="form-control" type="text" defaultValue="2 Years" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Age</label>
+                      <input className="form-control" type="text" defaultValue="-" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary From</label>
+                      <input type="text" className="form-control" defaultValue="32k" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary To</label>
+                      <input type="text" className="form-control" defaultValue="38k" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Type</label>
+                      <select className="select">
+                        <option >Full Time</option>
+                        <option>Part Time</option>
+                        <option>Internship</option>
+                        <option>Temporary</option>
+                        <option>Remote</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Status</label>
+                      <select className="select">
+                        <option >Open</option>
+                        <option>Closed</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Start Date</label>
+                      <input type="text" className="form-control datetimepicker" defaultValue="3 Mar 2019" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Expired Date</label>
+                      <input type="text" className="form-control datetimepicker" defaultValue="31 May 2019" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea className="form-control" defaultValue={""} />
+                    </div>
+                  </div>
+                </div>
+                <div className="submit-section">
+                  <button className="btn btn-primary submit-btn">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/* /Edit Job Modal */}
+    </div>
+  );
+};
+
+export default Requisition;

@@ -1,0 +1,50 @@
+{
+  "requisition": [
+    {
+      "values": {
+        "requisitionId": "1",
+        "dateOfReq": "2022-12-15",
+        "closingDate": "2022-12-30",
+        "client": "Google",
+        "role": "React Developer",
+        "jobType": "Full Time",
+        "country": "India",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "postalCode": "600001",
+        "min": "1000000",
+        "max": "10000000",
+        "jd": "We are looking for a skilled react.js developer to join our front-end development team. In this role, you will be responsible for developing and implementing user interface components using React.js concepts and workflows such as Redux, Flux, and Webpack. You will also be responsible for profiling and improving front-end performance and documenting our front-end codebase.\nTo ensure success as a react.js developer, you should have in-depth knowledge of JavaScript and React concepts, excellent front-end coding skills, and a good understanding of progressive web applications. Ultimately, a top-class react.js developer should be able to design and build modern user interface components to enhance application performance.",
+        "resp": "Meeting with the development team to discuss user interface ideas and applications.\nReviewing application requirements and interface designs.\nIdentifying web-based user interactions.\nDeveloping and implementing highly responsive user interface components using react concepts.\nWriting application interface codes using JavaScript following react.js workflows.\nTroubleshooting interface software and debugging application codes.\nDeveloping and implementing front-end architecture to support user interface concepts.\nMonitoring and improving front-end performance.\nDocumenting application changes and developing updates.",
+        "skills": "Bachelor’s degree in computer science, information technology, or a similar field.\nPrevious experience working as a react.js developer.\nIn-depth knowledge of JavaScript, CSS, HTML, and front-end languages.\nKnowledge of REACT tools including React.js, Webpack, Enzyme, Redux, and Flux.\nExperience with user interface design.\nKnowledge of performance testing frameworks including Mocha and Jest.\nExperience with browser-based debugging and performance testing software.\nExcellent troubleshooting skills.\nGood project management skills.",
+        "workType": "From Office",
+        "elegibleCriteria": "5 - 10 years",
+        "goodToAdd": "Redux, React, javascript, Material Ui, JQueryecmascript"
+      },
+      "id": 5
+    },
+    {
+      "values": {
+        "requisitionId": "52",
+        "dateOfReq": "2022-12-10",
+        "closingDate": "2022-12-23",
+        "client": "kj",
+        "role": "jk",
+        "jobType": "",
+        "country": "",
+        "city": "",
+        "state": "",
+        "postalCode": "",
+        "min": "",
+        "max": "",
+        "jd": "",
+        "resp": "",
+        "skills": "",
+        "workType": "",
+        "elegibleCriteria": "",
+        "goodToAdd": ""
+      },
+      "id": 9
+    }
+  ]
+}
