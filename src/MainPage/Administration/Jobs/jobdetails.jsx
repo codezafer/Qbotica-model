@@ -8,15 +8,10 @@ import { Helmet } from "react-helmet";
 import { Link,useParams } from "react-router-dom";
 
 const Jobdetails = () => {
-  const [values, setValues] = useState([]);
+  const {id} = useParams();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    // const url = "http://localhost:9000/requisition";
-    // const getPosts = async () =>{
-    //   const {data : res} = await axios.get(url);
-    //   setValues(res);
-    // };
-    // getPosts();
     getData();
     // if ($(".select").length > 0) {
     //   $(".select").select2({
@@ -26,12 +21,15 @@ const Jobdetails = () => {
     // }
   },[]);
  const getData = async () =>{
-  axios.get(`http://localhost:9000/requisition`)
-    .then((getData) =>{
-      setValues(getData.data);
+  axios.get(`http://localhost:9000/requisition/${id}`)
+    .then((product) =>{
+      // const newData =  product.data.find((item) => item.id=== parseInt(id));
+      setData(product.data);
+      console.log(product.data);
     })
   };
-  console.log(useParams())
+
+  
   return (
     
     <div className="page-wrapper">
@@ -40,7 +38,7 @@ const Jobdetails = () => {
         <meta name="description" content="Login page" />
       </Helmet>
       {/* Page Content */}
-      {values.map((data) => (
+      {/* {values.map((data) => ( */}
       <div key={data.id} className="content container-fluid">
         {/* Page Header */}
         <div className="page-header">
@@ -172,7 +170,6 @@ const Jobdetails = () => {
           </div>
         </div>
       </div>
-      ))}
       {/* /Page Content */}
     </div>
   );

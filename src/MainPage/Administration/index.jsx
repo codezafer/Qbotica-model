@@ -11,7 +11,7 @@ import knowledgebase from "./knowledgebase"
 import knowledgebaseview from "./knowledgebase-view"
 import Managedjobs from "./Jobs/managejobs"
 import AppliedCandidate from "./Jobs/appliedcandidate"
-import jobdetails from "./Jobs/jobdetails"
+import JobDetails from "./Jobs/jobdetails"
 import AptituedeResults from "./Jobs/aptituderesults"
 import CandidateList from "./Jobs/candidatelist"
 import Experiencelevel from "./Jobs/experiencelevel"
@@ -57,7 +57,7 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/manage-resumes`} component={ManageResumes} />
         <Route path={`${match.url}/shortlist-candidates`} component={ShortlistCandidate} />
         <Route path={`${match.url}/interview-questions`} component={Interviewquestion} />
-        <Route path={`${match.url}/job-details`} component={jobdetails} />
+        <Route path={`${match.url}/job-details/:id`} children={<JobDetails/>}/>
         <Route path={`${match.url}/job-applicants`} component={AppliedCandidate} />
         <Route path={`${match.url}/offer_approvals`} component={Offerapproval} />
         <Route path={`${match.url}/experiance-level`} component={Experiencelevel} />
@@ -68,7 +68,7 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/questions`} component={Questions} />
         <Route path={`${match.url}/requisition`} component={Requisition}/>
         <Route path={`${match.url}/create-requisition`} component={CreateRequisition}/>
-        <Route path={`${match.url}/update-requisition`} component={UpdateRequisition}/>
+        <Route path={`${match.url}/update-requisition/:id`} children={<UpdateRequisition/>}/>
     </Switch>
 );
 

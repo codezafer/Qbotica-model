@@ -41,6 +41,7 @@ const Requisition = () => {
     await axios.delete(`http://localhost:9000/requisition/${id}`);
     // const filteredData = values.filter(item => item.id !== id);
     // setValues(filteredData);
+    // console.log(filteredData)
     loadData();
   };
 
@@ -134,7 +135,7 @@ const Requisition = () => {
           >
             <DeleteTwoTone />
           </Popconfirm>
-          <Link to="/app/administrator/update-requisition">
+          <Link to={`/app/administrator/update-requisition/${record.id}`}>
             <EditTwoTone />
           </Link>
         </Space>
