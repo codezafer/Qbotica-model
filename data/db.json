@@ -45,6 +45,29 @@
         "goodToAdd": ""
       },
       "id": 9
+    },
+    {
+      "values": {
+        "requisitionId": "526",
+        "dateOfReq": "2022-12-18",
+        "closingDate": "2022-12-24",
+        "client": "Google",
+        "role": "vue",
+        "jobType": "",
+        "country": "",
+        "city": "",
+        "state": "",
+        "postalCode": "",
+        "min": "",
+        "max": "",
+        "jd": "",
+        "resp": "",
+        "skills": "ad",
+        "workType": "Hybrid",
+        "elegibleCriteria": "",
+        "goodToAdd": ""
+      },
+      "id": 10
     }
   ]
 }

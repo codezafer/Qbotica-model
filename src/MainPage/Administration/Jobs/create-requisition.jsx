@@ -45,14 +45,6 @@ const CreateRequisition = (props) => {
   //   formState: { errors },
   // } = useForm()
 
-  // useEffect(() => {
-  //   if ($('.select').length > 0) {
-  //     $('.select').select2({
-  //       minimumResultsForSearch: -1,
-  //       width: '100%'
-  //     });
-  //   }
-  // });
 
   const onFormFieldChange = (e) => {
     setValues({
