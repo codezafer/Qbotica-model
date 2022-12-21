@@ -14,7 +14,7 @@ const [level2Menu, setLevel2Menu] = useState("")
 const [level3Menu, setLevel3Menu] = useState("")
 
 const toggleSidebar = (value) => {
-  console.log (value);
+  // console.log (value);
   setSideMenu(value);
  
 }
@@ -54,20 +54,20 @@ const toggleLevelThree = (value) => {
                 <a href="#" className={isSideMenu == "jobs" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="jobs" ? "": "jobs")}><i className="la la-briefcase" /> <span> Jobs </span> <span className="menu-arrow" /></a>
                 { isSideMenu == "jobs" ? 
                 <ul>
+                   <li><Link className={pathname.includes('jobs-dashboard') ?"active" :""} to="/app/administrator/jobs-dashboard"> Jobs Dasboard </Link></li>
                   <li><Link className={pathname.includes('requisition') ?"active" :""} to="/app/administrator/requisition"> Requisition </Link></li>
-                  <li><Link className={pathname.includes('user-dashboard') || pathname.includes('user-all-jobs')|| pathname.includes('saved-jobs')
+                  {/* <li><Link className={pathname.includes('user-dashboard') || pathname.includes('user-all-jobs')|| pathname.includes('saved-jobs')
                       || pathname.includes('applied-jobs')|| pathname.includes('interviewing')|| pathname.includes('offered-jobs')|| 
                       pathname.includes('visited-jobs') || pathname.includes('archived-jobs')
                       || pathname.includes('job-aptitude') || pathname.includes('questions') ?"active" :""} 
-                      to="/app/administrator/user-dashboard"> User Dasboard </Link></li>
-                  <li><Link className={pathname.includes('jobs-dashboard') ?"active" :""} to="/app/administrator/jobs-dashboard"> Jobs Dasboard </Link></li>
-                  <li><Link className={pathname === ('/app/administrator/jobs') ?"active" :""} to="/app/administrator/jobs"> Manage Jobs </Link></li>
+                      to="/app/administrator/user-dashboard"> User Dasboard </Link></li> */}
+                  {/* <li><Link className={pathname === ('/app/administrator/jobs') ?"active" :""} to="/app/administrator/jobs"> Manage Jobs </Link></li> */}
+                  <li><Link className={pathname === ('/app/administrator/candidates') ?"active" :""} to="/app/administrator/candidates"> Candidates List </Link></li>
                   <li><Link className={pathname.includes('manage-resumes') ?"active" :""} to="/app/administrator/manage-resumes"> Manage Resumes </Link></li>
                   <li><Link className={pathname.includes('shortlist-candidates') ?"active" :""} to="/app/administrator/shortlist-candidates"> Shortlist Candidates </Link></li>
                   {/* <li><Link className={pathname === ('/app/administrator/interview-questions') ?"active" :""} to="/app/administrator/interview-questions"> Interview Questions </Link></li>
                   <li><Link className={pathname.includes('offer_approvals') ?"active" :""} to="/app/administrator/offer_approvals"> Offer Approvals </Link></li>
                   <li><Link className={pathname.includes('experiance-level') ?"active" :""} to="/app/administrator/experiance-level"> Experience Level </Link></li> */}
-                  <li><Link className={pathname === ('/app/administrator/candidates') ?"active" :""} to="/app/administrator/candidates"> Candidates List </Link></li>
                   {/* <li><Link className={pathname.includes('schedule-timing') ?"active" :""} to="/app/administrator/schedule-timing"> Schedule timing </Link></li>
                   <li><Link className={pathname.includes('apptitude-result') ?"active" :""} to="/app/administrator/apptitude-result"> Aptitude Results </Link></li> */}
                   

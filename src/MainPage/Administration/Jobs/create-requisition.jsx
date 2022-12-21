@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios, { Axios } from "axios";
 import { useForm, Controller, set } from "react-hook-form";
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateRequisition = (props) => {
   const [values, setValues] = useState({
@@ -44,7 +45,9 @@ const CreateRequisition = (props) => {
   //   clearErrors,
   //   formState: { errors },
   // } = useForm()
+  
 
+  console.log(uuidv4());
 
   const onFormFieldChange = (e) => {
     setValues({
@@ -82,8 +85,8 @@ const CreateRequisition = (props) => {
                       name="requisitionId"
                       className="form-control"
                       type="text"
-                      value={values.requisitionId}
-                      onChange={onFormFieldChange}
+                      value={uuidv4()}
+                      readOnly
                     />
                   </div>
                 </div>

@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios, { Axios } from "axios";
 import { useForm, Controller, set } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 
-const UpdateRequisition = (props) => {
+const UpdateRequisition = () => {
   const { id } = useParams();
   const [requisitionId, setRequisitionId] = useState();
   const [dateOfReq, setDateOfReq] = useState();
@@ -60,24 +60,37 @@ const UpdateRequisition = (props) => {
     setGoodToAdd(response.data.values.goodToAdd);
   };
 
+  const history=useHistory();
   
-  const RequisitionSubmit = () => {
-    const inputdata = {
-      id:id,
+  const RequisitionSubmit = (e) => {
+    e.preventDefault();
+    const values = {
       requisitionId : requisitionId,
       dateOfReq : dateOfReq,
       closingDate : closingDate,
       role : role,
       client : client,
-      jobType : jobType
+      jobType : jobType,
+      country :country,
+      city : city,
+      state : state,
+      postalCode : postalCode,
+      min : min,
+      max : max,
+      jd : jd,
+      resp : resp,
+      skills : skills,
+      workType : workType,
+      elegibleCriteria : elegibleCriteria,
+      goodToAdd : goodToAdd
     }
     try{
-    const updatedata = axios.put("http://localhost:9000/requisition", {inputdata})
+    const updatedata = axios.put(`http://localhost:9000/requisition/${id}`, {values})
     console.log(updatedata)
-    props.history.push("/app/administrator/requisition");
+    history.push("/app/administrator/requisition");
     }catch(errors){
       console.log("error")
-    }
+    }  
   };
 
 

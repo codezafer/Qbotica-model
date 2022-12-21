@@ -98,12 +98,11 @@ const Jobdetails = () => {
           </div>
           <div className="col-md-4">
             <div className="job-det-info job-widget">
-              <a
-                className="btn job-btn"
-                href="/app/administrator/update-requisition"
-              >
-                Edit
-              </a>
+              {/* <button
+                className="btn job-btn" 
+              ><Link to={`/app/administrator/update-requisition/${id}`}>
+                Edit</Link>
+              </button> */}
               <div className="info-list">
                 <span>
                   <i className="fa fa-bar-chart" />

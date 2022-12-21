@@ -9,7 +9,6 @@ import Activities from "./activities"
 import Assets from "./assets"
 import knowledgebase from "./knowledgebase"
 import knowledgebaseview from "./knowledgebase-view"
-import Managedjobs from "./Jobs/managejobs"
 import AppliedCandidate from "./Jobs/appliedcandidate"
 import JobDetails from "./Jobs/jobdetails"
 import AptituedeResults from "./Jobs/aptituderesults"
@@ -21,7 +20,6 @@ import ManageResumes from "./Jobs/manageresumes"
 import Offerapproval from "./Jobs/offerapproval"
 import ScheduleTimings from "./Jobs/scheduletiming"
 import ShortlistCandidate from "./Jobs/shortlistcandidates"
-import UserDashboard from "./Jobs/user_dashboard"
 import Useralljobs from "./Jobs/user_all_jobs"
 import Savedjobs from "./Jobs/saved_jobs"
 import Appliedjobs from "./Jobs/applied_jobs"
@@ -44,7 +42,6 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/assets`} component={Assets} />
         <Route path={`${match.url}/knowledgebase`} component={knowledgebase} />
         <Route path={`${match.url}/knowledgebase-view`} component={knowledgebaseview} />
-        <Route path={`${match.url}/user-dashboard`} component={UserDashboard} />
         <Route path={`${match.url}/user-all-jobs`} component={Useralljobs} />
         <Route path={`${match.url}/saved-jobs`} component={Savedjobs} />
         <Route path={`${match.url}/applied-jobs`} component={Appliedjobs} />
@@ -53,7 +50,6 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/visited-jobs`} component={Visitedjobs} />
         <Route path={`${match.url}/archived-jobs`} component={Archivedjobs} />
         <Route path={`${match.url}/jobs-dashboard`} component={JobsDashboard} />
-        <Route path={`${match.url}/jobs`} component={Managedjobs} />
         <Route path={`${match.url}/manage-resumes`} component={ManageResumes} />
         <Route path={`${match.url}/shortlist-candidates`} component={ShortlistCandidate} />
         <Route path={`${match.url}/interview-questions`} component={Interviewquestion} />

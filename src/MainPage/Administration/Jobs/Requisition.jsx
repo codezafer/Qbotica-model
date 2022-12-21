@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Table, Popconfirm, Space } from "antd";
-import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone, DownloadOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
@@ -73,14 +73,12 @@ const Requisition = () => {
       title: "Start Date",
       dataIndex: "dateOfReq",
       align: "center",
-      sorter: (a, b) => a.dateOfReq.length - b.dateOfReq.length,
     },
 
     {
       title: "Expiry Date",
       dataIndex: "closingDate",
       align: "center",
-      sorter: (a, b) => a.closingDate.length - b.closingDate.length,
     },
     {
       title: "Job Type",
@@ -102,7 +100,6 @@ const Requisition = () => {
       //     </div>
       // </div>
       //   ),
-      sorter: (a, b) => a.jobType.length - b.jobType.length,
     },
     // {
     //   title: 'Status',
@@ -137,7 +134,7 @@ const Requisition = () => {
           </Popconfirm>
           <Link to={`/app/administrator/update-requisition/${record.id}`}>
             <EditTwoTone />
-          </Link>
+          </Link> 
         </Space>
       ),
     },

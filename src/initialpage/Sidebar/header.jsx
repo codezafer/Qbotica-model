@@ -42,7 +42,7 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
         {/* Header Menu */}
         <ul className="nav user-menu">
           {/* Search */}
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <div className="top-nav-search">
               <a href="" className="responsive-search">
                 <i className="fa fa-search" />
@@ -52,11 +52,11 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
                 <button className="btn" type="submit"><i className="fa fa-search" /></button>
               </form>
             </div>
-          </li>
+          </li> */}
           {/* /Search */}
           {/* Flag */}
-          <li className="nav-item dropdown has-arrow flag-nav">
-            {/* <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+          {/* <li className="nav-item dropdown has-arrow flag-nav">
+            <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
               <img src={lnEnglish} alt="" height={20} /> <span>English</span>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
@@ -72,11 +72,11 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
                   <a href="" className="dropdown-item">
                     <img src={lnGerman} alt="" height={16} /> German
                   </a>
-            </div> */}
-          </li>
+            </div>
+          </li> */}
           {/* /Flag */}
           {/* Notifications */}
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a href="#" className="dropdown-toggle nav-link" data-bs-toggle="dropdown">
               <i className="fa fa-bell-o" /> <span className="badge badge-pill">3</span>
             </a>
@@ -158,10 +158,10 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
                 <Link onClick={()=>localStorage.setItem("minheight","true")} to="/app/administrator/activities">View all Notifications</Link>
               </div>
             </div>
-          </li>
+          </li> */}
           {/* /Notifications */}
           {/* Message Notifications */}
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a href="#" className="dropdown-toggle nav-link" data-bs-toggle="dropdown">
               <i className="fa fa-comment-o" /> <span className="badge badge-pill">8</span>
             </a>
@@ -263,7 +263,7 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
                 <Link onClick={()=>localStorage.setItem("minheight","true")} to="/conversation/chat">View all Messages</Link>
               </div>
             </div>
-          </li>
+          </li> */}
           {/* /Message Notifications */}
           <li className="nav-item dropdown has-arrow main-drop">
             <a href="#" className="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -272,8 +272,8 @@ import {headerlogo,lnEnglish,lnFrench,lnSpanish,lnGerman, Avatar_02,Avatar_03,Av
               <span>Admin</span>
             </a>
             <div className="dropdown-menu">
-              <Link className="dropdown-item" to="/app/profile/employee-profile">My Profile</Link>
-              <Link className="dropdown-item" to="/settings/companysetting">Settings</Link>
+              {/* <Link className="dropdown-item" to="/app/profile/employee-profile">My Profile</Link> */}
+              {/* <Link className="dropdown-item" to="/settings/companysetting">Settings</Link> */}
               <Link className="dropdown-item" to="/login">Logout</Link>
             </div>
           </li>
