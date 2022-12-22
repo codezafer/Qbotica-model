@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios, { Axios } from "axios";
 import { useForm, Controller, set } from "react-hook-form";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 const CreateRequisition = (props) => {
   const [values, setValues] = useState({
-    requisitionId: "",
+    requisitionId: uuidv4(),
     dateOfReq: "",
     closingDate: "",
     client: "",
@@ -38,6 +38,9 @@ const CreateRequisition = (props) => {
   useEffect(() => {
       RequisitionSubmit();
   }, []);
+  
+ 
+ 
 
   // const {
   //   control,
@@ -46,8 +49,6 @@ const CreateRequisition = (props) => {
   //   formState: { errors },
   // } = useForm()
   
-
-  console.log(uuidv4());
 
   const onFormFieldChange = (e) => {
     setValues({
@@ -85,8 +86,9 @@ const CreateRequisition = (props) => {
                       name="requisitionId"
                       className="form-control"
                       type="text"
-                      value={uuidv4()}
+                      value={values.requisitionId}
                       readOnly
+                      onChange={onFormFieldChange}
                     />
                   </div>
                 </div>

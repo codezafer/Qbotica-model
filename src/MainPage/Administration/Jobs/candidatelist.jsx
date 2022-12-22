@@ -1,252 +1,423 @@
-/**
- * Signin Firebase
- */
+//candidatelist
 
- import React, { useState,useEffect } from 'react';
- import { Helmet } from "react-helmet";
- import { Link } from 'react-router-dom';
- import {  Avatar_01 ,Avatar_02,Avatar_03 } from "../../../Entryfile/imagepath"
- import  Deletejob from "../../../_components/modelbox/Deletejob"
- import { Table } from 'antd';
- import 'antd/dist/antd.css';
- import {itemRender,onShowSizeChange} from "../../paginationfunction"
- import "../../antdstyle.css"
- 
- const CandidateList = () => {
+import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { Table, Popconfirm, Space } from "antd";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import "antd/dist/antd.css";
+import { itemRender, onShowSizeChange } from "../../paginationfunction";
+import "../../antdstyle.css";
+import { resolveOnChange } from "antd/lib/input/Input";
+// import profile from '../../../../data/db.json'
 
-      const [data, setData] = useState([
-            {id:1,image: Avatar_02,name:"John Doe",mobilenumber:"9876543210",email:"johndoe@example.com",createddate:"1 Jan 2013"},
-            {id:2,image: Avatar_01,name:"Richard Miles",mobilenumber:"9876543210",email:"richardmiles@example.com",createddate:"18 Mar 2014"},
-            {id:3,image: Avatar_03,name:"John Smith",mobilenumber:"9876543210",email:"johnsmith@example.com",createddate:"1 Apr 2014"},
-      ]);
-      useEffect( ()=>{
-        if($('.select').length > 0) {
-          $('.select').select2({
-            minimumResultsForSearch: -1,
-            width: '100%'
-          });
-        }
-      });  
- 
-      const columns = [
-        {
-          title: '#',
-          dataIndex: 'id',
-            sorter: (a, b) => a.id.length - b.id.length,
-        },
-        {
-         title: 'Name',
-         dataIndex: 'name',
-         render: (text, record) => (            
-             <h2 className="table-avatar">
-               <Link to="/app/profile/employee-profile" className="avatar"><img alt="" src={record.image} /></Link>
-               <Link to="/app/profile/employee-profile">{text}</Link>
-             </h2>
-           ), 
-           sorter: (a, b) => a.name.length - b.name.length,
-       },
-        {
-          title: 'Mobile Number',
-          dataIndex: 'mobilenumber',
-            sorter: (a, b) => a.mobilenumber.length - b.mobilenumber.length,
-        },
-      
-        {
-          title: 'Email',
-          dataIndex: 'email',
-          sorter: (a, b) => a.email.length - b.email.length,
-        },
-        {
-          title: 'Created Date',
-          dataIndex: 'createddate',
-          sorter: (a, b) => a.createddate.length - b.createddate.length,
-        },
-        {
-          title: 'Action',
-          render: (text, record) => (
-            <div className="dropdown dropdown-action text-center">
-               <a href="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-               <div className="dropdown-menu dropdown-menu-right">
-               <a className="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit_job"><i className="fa fa-pencil m-r-5" /> Edit</a>
-               <a className="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_job"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-               </div>
+const CandidateList = () => {
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const url = "http://localhost:9000/candidatelist";
+
+  const loadData = async () => {
+    const response = await axios.get(url);
+    setValues(response.data);
+  };
+
+  const dataWithDetails = values.map((details) => ({
+    ...details,
+    key: details.id,
+    id: details.id,
+    name:`${details.values.firstName} ${details.values.lastName}`,
+    emailId: details.values.emailId,
+    phone: details.values.phone
+  }));
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:9000/candidatelist/${id}`);
+    // const filteredData = values.filter(item => item.id !== id);
+    // setValues(filteredData);
+    // console.log(filteredData)
+    loadData();
+  };
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      align: "center",
+      sorter: (a, b) => a.id.length - b.id.length,
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      editTable: true,
+      align: "center",
+      // render: (_,record) => (
+      //   <Link to={`/app/administrator/job-details/${record.id}`} >{record.lastName}</Link>
+      // ),
+      sorter: (a, b) => a.lastName.length - b.lastName.length,
+    },
+
+    {
+      title: "Email",
+      dataIndex: "emailId",
+      align: "center",
+      sorter: (a, b) => a.emailId.length - b.emailId.length,
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      align: "center",
+      sorter: (a, b) => a.phone.length - b.phone.length,
+    },
+
+    {
+      title: "Action",
+      dataIndex: "action",
+      align: "center",
+      render: (_, record) => (
+        <Space>
+          <Popconfirm
+            title="Are you sure want to delete ?"
+            onConfirm={() => handleDelete(record.id)}
+          >
+            <DeleteTwoTone />
+          </Popconfirm>
+          <Link to={`/app/administrator/update-candidate/${record.id}`}>
+            <EditTwoTone />
+          </Link>
+        </Space>
+      ),
+    },
+  ];
+  return (
+    <div className="page-wrapper">
+      <Helmet>
+        <title>Candidate List - qBotica</title>
+        <meta name="description" content="Login page" />
+      </Helmet>
+      {/* Page Content */}
+      <div className="content container-fluid">
+        {/* Page Header */}
+        <div className="page-header">
+          <div className="row align-items-center">
+            <div className="col">
+              <h3 className="page-title">Candidate List</h3>
+              <ul className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link to="/app/main/dashboard">Dashboard</Link>
+                </li>
+                <li className="breadcrumb-item active">Candidate List</li>
+              </ul>
             </div>
-            ), 
-        },    
-      ]
-      
-       return ( 
-         <>
-         {/* Page Wrapper */}
-         <div className="page-wrapper">
-            <Helmet>
-                  <title>Candidates List - qBotica</title>
-                  <meta name="description" content="Login page"/>					
-            </Helmet>
-           {/* Page Content */}
-           <div className="content container-fluid">
-             {/* Page Header */}
-             <div className="page-header">
-               <div className="row align-items-center">
-                 <div className="col">
-                   <h3 className="page-title">Candidates List</h3>
-                   <ul className="breadcrumb">
-                     <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
-                     <li className="breadcrumb-item">Jobs</li>
-                     <li className="breadcrumb-item active">Candidates List</li>
-                   </ul>
-                 </div>
-                 <div className="col-auto float-end ml-auto">
-                   <a href="#" data-bs-toggle="modal" data-bs-target="#add_employee" className="btn add-btn"> Add Candidates</a>
-                 </div>
-               </div>
-             </div>
-             {/* /Page Header */}
-             <div className="row">
-               <div className="col-md-12">
-                 <div className="table-responsive">
-                 <Table className="table-striped"
-                     pagination= { {total : data.length,
-                        showTotal : (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                        showSizeChanger : true,onShowSizeChange: onShowSizeChange ,itemRender : itemRender } }
-                     style = {{overflowX : 'auto'}}
-                     columns={columns}                 
-                     // bordered
-                     dataSource={data}
-                     rowKey={record => record.id}
-                    //  onChange={this.handleTableChange}
-                     />
-                 </div>
-               </div>
-             </div>
-           </div>
-           {/* /Page Content */}
-           {/* Add Employee Modal */}
-           <div id="add_employee" className="modal custom-modal fade" role="dialog">
-             <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-               <div className="modal-content">
-                 <div className="modal-header">
-                   <h5 className="modal-title">Add Candidates</h5>
-                   <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                   </button>
-                 </div>
-                 <div className="modal-body">
-                   <form>
-                     <div className="row">
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">First Name <span className="text-danger">*</span></label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Last Name</label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Email <span className="text-danger">*</span></label>
-                           <input className="form-control" type="email" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">  
-                         <div className="form-group">
-                           <label className="col-form-label">Employee ID <span className="text-danger">*</span></label>
-                           <input type="text" className="form-control" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">  
-                         <div className="form-group">
-                           <label className="col-form-label">Created Date <span className="text-danger">*</span></label>
-                           <div><input className="form-control datetimepicker" type="date" /></div>
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Phone </label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                     </div>
-                     <div className="submit-section">
-                       <button className="btn btn-primary submit-btn">Submit</button>
-                     </div>
-                   </form>
-                 </div>
-               </div>
-             </div>
-           </div>
-           {/* /Add Employee Modal */}
-           {/* Edit Job Modal */}
-           <div id="edit_job" className="modal custom-modal fade" role="dialog">
-             <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-               <div className="modal-content">
-                 <div className="modal-header">
-                   <h5 className="modal-title">Edit Candidates</h5>
-                   <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                   </button>
-                 </div>
-                 <div className="modal-body">
-                   <form>
-                     <div className="row">
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">First Name <span className="text-danger">*</span></label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Last Name</label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Email <span className="text-danger">*</span></label>
-                           <input className="form-control" type="email" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">  
-                         <div className="form-group">
-                           <label className="col-form-label">Employee ID <span className="text-danger">*</span></label>
-                           <input type="text" className="form-control" />
-                         </div>
-                       </div>
-                       <div className="col-sm-6">  
-                         <div className="form-group">
-                           <label className="col-form-label">Created Date <span className="text-danger">*</span></label>
-                           <div><input className="form-control datetimepicker" type="date" /></div>
-                         </div>
-                       </div>
-                       <div className="col-sm-6">
-                         <div className="form-group">
-                           <label className="col-form-label">Phone </label>
-                           <input className="form-control" type="text" />
-                         </div>
-                       </div>
-                     </div>
-                     <div className="submit-section">
-                       <button className="btn btn-primary submit-btn">Save</button>
-                     </div>
-                   </form>
-                 </div>
-               </div>
-             </div>
-           </div>
-           {/* /Edit Job Modal */}
-           {/* Delete Job Modal */}
-          <Deletejob/>
-           {/* /Delete Job Modal */}
-         </div>
-         {/* /Page Wrapper */}
-         </>
-       );
-    }
- 
- export default CandidateList;
- 
+            <div className="col-auto float-end ml-auto">
+              <Link
+                to="/app/administrator/add-candidate"
+                className="btn add-btn"
+              >
+                <i className="fa fa-plus" />
+                Add Candidate
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* /Page Header */}
+        <div className="row">
+          <div className="col-md-12">
+            <div className="table-responsive">
+              <Table
+                className="table-striped"
+                pagination={{
+                  total: dataWithDetails.length,
+                  showTotal: (total, range) =>
+                    `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                  showSizeChanger: true,
+                  onShowSizeChange: onShowSizeChange,
+                  itemRender: itemRender,
+                }}
+                style={{ overflowX: "auto" }}
+                columns={columns}
+                bordered
+                dataSource={dataWithDetails}
+
+                // rowKey={record => record.id}
+                // onChange={this.handleTableChange}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* /Page Content */}
+      {/* Add Job Modal */}
+      {/* <div id="add_job" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Add Job</h5>
+              <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Title</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Department</label>
+                      <select className="select">
+                        <option>-</option>
+                        <option>Web Development</option>
+                        <option>Application Development</option>
+                        <option>IT Management</option>
+                        <option>Accounts Management</option>
+                        <option>Support Management</option>
+                        <option>Marketing</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Location</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>No of Vacancies</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Experience</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Age</label>
+                      <input className="form-control" type="text" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary From</label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary To</label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Type</label>
+                      <select className="select">
+                        <option>Full Time</option>
+                        <option>Part Time</option>
+                        <option>Internship</option>
+                        <option>Temporary</option>
+                        <option>Remote</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Status</label>
+                      <select className="select">
+                        <option>Open</option>
+                        <option>Closed</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Start Date</label>
+                      <input type="text" className="form-control datetimepicker" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Expired Date</label>
+                      <input type="text" className="form-control datetimepicker" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea className="form-control" defaultValue={""} />
+                    </div>
+                  </div>
+                </div>
+                <div className="submit-section">
+                  <button className="btn btn-primary submit-btn">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/* /Add Job Modal */}
+      {/* Edit Job Modal */}
+      {/* <div id="edit_job" className="modal custom-modal fade" role="dialog">
+        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <button type="button" className="close" data-bs-dismiss="modal">×</button>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Edit Job</h5>
+              <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Title</label>
+                      <input className="form-control" type="text" defaultValue="Web Developer" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Department</label>
+                      <select className="select">
+                        <option>-</option>
+                        <option >Web Development</option>
+                        <option>Application Development</option>
+                        <option>IT Management</option>
+                        <option>Accounts Management</option>
+                        <option>Support Management</option>
+                        <option>Marketing</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Location</label>
+                      <input className="form-control" type="text" defaultValue="California" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>No of Vacancies</label>
+                      <input className="form-control" type="text" defaultValue={5} />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Experience</label>
+                      <input className="form-control" type="text" defaultValue="2 Years" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Age</label>
+                      <input className="form-control" type="text" defaultValue="-" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary From</label>
+                      <input type="text" className="form-control" defaultValue="32k" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Salary To</label>
+                      <input type="text" className="form-control" defaultValue="38k" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Job Type</label>
+                      <select className="select">
+                        <option >Full Time</option>
+                        <option>Part Time</option>
+                        <option>Internship</option>
+                        <option>Temporary</option>
+                        <option>Remote</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Status</label>
+                      <select className="select">
+                        <option >Open</option>
+                        <option>Closed</option>
+                        <option>Cancelled</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Start Date</label>
+                      <input type="text" className="form-control datetimepicker" defaultValue="3 Mar 2019" />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label>Expired Date</label>
+                      <input type="text" className="form-control datetimepicker" defaultValue="31 May 2019" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Description</label>
+                      <textarea className="form-control" defaultValue={""} />
+                    </div>
+                  </div>
+                </div>
+                <div className="submit-section">
+                  <button className="btn btn-primary submit-btn">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/* /Edit Job Modal */}
+    </div>
+  );
+};
+
+export default CandidateList;

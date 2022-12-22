@@ -125,6 +125,7 @@ const UpdateRequisition = () => {
                       className="form-control"
                       type="text"
                       value={requisitionId}
+                      readOnly
                       onChange={(e) => {
                         setRequisitionId(e.target.value);
                       }}

@@ -13,7 +13,6 @@ import { alphaNumericPattern, emailrgx } from '../constant'
 import axios from 'axios'
 import {setTempEmailId, clearTempEmailId} from '../handlers/tempEmailIdUtils'
 
-
 // const schema = yup
 //   .object({
 //     email: yup
@@ -179,7 +178,7 @@ const Loginpage = (props) => {
                   </div>
                   <div className="form-group text-center">
                     <button
-                      className="btn btn-primary account-btn"
+                      className="btn btn-primary account-btn float float:hover"
                       type="submit"
                     >
                       Login

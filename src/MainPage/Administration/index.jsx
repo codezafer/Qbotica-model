@@ -32,6 +32,8 @@ import Questions from "./Jobs/questions"
 import Requisition from "./Jobs/requisition"
 import CreateRequisition from './Jobs/create-requisition';
 import UpdateRequisition from './Jobs/update-requisition'
+import CreateCandidate from './Jobs/create_candidate';
+import UpdateCandidate from './Jobs/update-candidate';
 
 
 const Uiinterfaceroute = ({ match }) => (
@@ -65,6 +67,8 @@ const Uiinterfaceroute = ({ match }) => (
         <Route path={`${match.url}/requisition`} component={Requisition}/>
         <Route path={`${match.url}/create-requisition`} component={CreateRequisition}/>
         <Route path={`${match.url}/update-requisition/:id`} children={<UpdateRequisition/>}/>
+        <Route path={`${match.url}/add-candidate`} component={CreateCandidate}/>
+        <Route path={`${match.url}/update-candidate/:id`} children={<UpdateCandidate/>}/>
     </Switch>
 );
 
