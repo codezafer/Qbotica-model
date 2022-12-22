@@ -97,7 +97,7 @@ const Loginpage = (props) => {
       setSuccessMsg("Logged in successfull")
       clearErrors(['email', 'password', 'error'])
       setTimeout(() => {
-        props.history.push('/app/main/dashboard')
+        props.history.push('/app/administrator/jobs-dashboard')
       }, 500)
       clearTempEmailId(emailId)
     } else if (loginRequest.times === 1 && emailrgx.test(emailId) ){

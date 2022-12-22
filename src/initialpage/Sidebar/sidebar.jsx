@@ -64,7 +64,7 @@ const toggleLevelThree = (value) => {
                   {/* <li><Link className={pathname === ('/app/administrator/jobs') ?"active" :""} to="/app/administrator/jobs"> Manage Jobs </Link></li> */}
                   <li><Link className={pathname === ('/app/administrator/candidates') ?"active" :""} to="/app/administrator/candidates"> Candidates List </Link></li>
                   <li><Link className={pathname.includes('manage-resumes') ?"active" :""} to="/app/administrator/manage-resumes"> Manage Resumes </Link></li>
-                  <li><Link className={pathname.includes('shortlist-candidates') ?"active" :""} to="/app/administrator/shortlist-candidates"> Shortlist Candidates </Link></li>
+                  {/* <li><Link className={pathname.includes('shortlist-candidates') ?"active" :""} to="/app/administrator/shortlist-candidates"> Shortlist Candidates </Link></li> */}
                   {/* <li><Link className={pathname === ('/app/administrator/interview-questions') ?"active" :""} to="/app/administrator/interview-questions"> Interview Questions </Link></li>
                   <li><Link className={pathname.includes('offer_approvals') ?"active" :""} to="/app/administrator/offer_approvals"> Offer Approvals </Link></li>
                   <li><Link className={pathname.includes('experiance-level') ?"active" :""} to="/app/administrator/experiance-level"> Experience Level </Link></li> */}

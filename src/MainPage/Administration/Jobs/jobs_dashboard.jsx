@@ -84,8 +84,8 @@ import { Line } from "react-chartjs-2";
                  <div className="col-sm-12">
                    <h3 className="page-title">Job Dashboard</h3>
                    <ul className="breadcrumb">
-                     <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
-                     <li className="breadcrumb-item">Jobs</li>
+                     {/* <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
+                     <li className="breadcrumb-item">Jobs</li> */}
                      <li className="breadcrumb-item active">Job Dashboard</li>
                    </ul>
                  </div>

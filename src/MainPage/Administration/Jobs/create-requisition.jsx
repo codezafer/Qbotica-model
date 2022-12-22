@@ -4,11 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios, { Axios } from "axios";
 import { useForm, Controller, set } from "react-hook-form";
-import {v4 as uuidv4} from 'uuid';
 
 const CreateRequisition = (props) => {
   const [values, setValues] = useState({
-    requisitionId: uuidv4(),
+    requisitionId: create_UUID(),
     dateOfReq: "",
     closingDate: "",
     client: "",
@@ -40,7 +39,11 @@ const CreateRequisition = (props) => {
   }, []);
   
  
- 
+  function create_UUID (){
+    let value = Math.floor(1000 + Math.random() * 9000);
+    return value;
+}
+
 
   // const {
   //   control,

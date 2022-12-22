@@ -114,52 +114,6 @@
     },
     {
       "values": {
-        "requisitionId": "0487335e-3397-4b2c-ac57-3e4d8a8835a7",
-        "dateOfReq": "2022-12-04",
-        "closingDate": "",
-        "client": "",
-        "role": "worddoc",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 15
-    },
-    {
-      "values": {
-        "requisitionId": "676c6afe-2022-4593-9431-4bfb22524f13",
-        "dateOfReq": "",
-        "closingDate": "",
-        "client": "",
-        "role": "react",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 16
-    },
-    {
-      "values": {
         "requisitionId": "06477647-0c90-4abc-82bd-fe69427b6e01",
         "dateOfReq": "2022-12-09",
         "closingDate": "2022-12-30",
@@ -180,6 +134,29 @@
         "goodToAdd": ""
       },
       "id": 17
+    },
+    {
+      "values": {
+        "requisitionId": 2238,
+        "dateOfReq": "2022-12-01",
+        "closingDate": "2022-12-29",
+        "client": "Google",
+        "role": "worddoc",
+        "jobType": "Full Time",
+        "country": "India",
+        "city": "Bangalore",
+        "state": "Tamil Nadu",
+        "postalCode": "600001",
+        "min": "",
+        "max": "",
+        "jd": "",
+        "resp": "",
+        "skills": "",
+        "workType": "",
+        "elegibleCriteria": "",
+        "goodToAdd": ""
+      },
+      "id": 19
     }
   ],
   "candidatelist": [
