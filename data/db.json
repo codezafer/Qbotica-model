@@ -114,29 +114,6 @@
     },
     {
       "values": {
-        "requisitionId": "06477647-0c90-4abc-82bd-fe69427b6e01",
-        "dateOfReq": "2022-12-09",
-        "closingDate": "2022-12-30",
-        "client": "",
-        "role": "React Developer",
-        "jobType": "",
-        "country": "",
-        "city": "",
-        "state": "",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 17
-    },
-    {
-      "values": {
         "requisitionId": 2238,
         "dateOfReq": "2022-12-01",
         "closingDate": "2022-12-29",
