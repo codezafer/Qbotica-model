@@ -178,7 +178,7 @@ const Loginpage = (props) => {
                   </div>
                   <div className="form-group text-center">
                     <button
-                      className="btn btn-primary account-btn float float:hover"
+                      className="btn btn-primary account-btn"
                       type="submit"
                     >
                       Login

@@ -3,28 +3,35 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Table, Popconfirm, Space } from "antd";
-import { DeleteTwoTone, EditTwoTone, DownloadOutlined } from "@ant-design/icons";
+import { DeleteTwoTone, EditTwoTone, } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
-import { resolveOnChange } from "antd/lib/input/Input";
-// import profile from '../../../../data/db.json'
+import { useSelector,useDispatch } from "react-redux";
+import { getRequisitionData, deleteRequisitionData } from "../../../app/features/requisitionReducer";
+
 
 const Requisition = () => {
-  const [values, setValues] = useState([]);
+  const [page, setPage] = useState(1);
+  const {values} = useSelector((state) => state.jobs)
+  const dispatch = useDispatch();
+  const [requestStatus, setRequestStatus] = useState('idle')
+  
+  const load = requestStatus==='idle'
 
   useEffect(() => {
-    loadData();
+    if(load){
+      try{
+      setRequestStatus('pending')
+      dispatch(getRequisitionData())
+      } catch (err) {
+        console.error('Failed to load the post', err)
+    } finally {
+        setRequestStatus('idle')
+    }
+    } 
   }, []);
-
-  const url = "http://localhost:9000/requisition";
-
-  const loadData = async () => {
-    const response = await axios.get(url);
-    setValues(response.data);
-  };
 
   const dataWithDetails = values.map((details) => ({
     ...details,
@@ -37,20 +44,26 @@ const Requisition = () => {
     jobType: details.values.jobType,
   }));
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:9000/requisition/${id}`);
-    // const filteredData = values.filter(item => item.id !== id);
-    // setValues(filteredData);
-    // console.log(filteredData)
-    loadData();
-  };
+  const handleDelete = (id) => {
+    try {
+      setRequestStatus('pending')
+      dispatch(deleteRequisitionData({ id })).unwrap()
+  } catch (err) {
+      console.error('Failed to delete the post', err)
+  } finally {
+      setRequestStatus('idle')
+  }
+  }
+ 
 
   const columns = [
     {
       title: "Id",
       dataIndex: "id",
+      key:"index",
       align: "center",
-      sorter: (a, b) => a.id.length - b.id.length,
+      render:(value, item, index) => ((page - 1) * 10 + index + 1),
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Role",

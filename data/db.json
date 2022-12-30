@@ -88,52 +88,6 @@
         "goodToAdd": "Redux, React, javascript, Material Ui, JQueryecmascript"
       },
       "id": 12
-    },
-    {
-      "values": {
-        "requisitionId": "74389d18-9b44-4589-b5f1-eb8028034b01",
-        "dateOfReq": "2022-12-16",
-        "closingDate": "2022-12-30",
-        "client": "",
-        "role": "React Developer",
-        "jobType": "",
-        "country": "India",
-        "city": "Chennai",
-        "state": "Tamil Nadu",
-        "postalCode": "",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "asdfasd",
-        "skills": "",
-        "workType": "WFM",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 13
-    },
-    {
-      "values": {
-        "requisitionId": 2238,
-        "dateOfReq": "2022-12-01",
-        "closingDate": "2022-12-29",
-        "client": "Google",
-        "role": "worddoc",
-        "jobType": "Full Time",
-        "country": "India",
-        "city": "Bangalore",
-        "state": "Tamil Nadu",
-        "postalCode": "600001",
-        "min": "",
-        "max": "",
-        "jd": "",
-        "resp": "",
-        "skills": "",
-        "workType": "",
-        "elegibleCriteria": "",
-        "goodToAdd": ""
-      },
-      "id": 19
     }
   ],
   "candidatelist": [

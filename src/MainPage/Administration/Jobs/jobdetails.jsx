@@ -10,6 +10,8 @@ import { Link,useParams } from "react-router-dom";
 const Jobdetails = () => {
   const {id} = useParams();
   const [data, setData] = useState([]);
+ 
+ 
 
   useEffect(() => {
     getData();
