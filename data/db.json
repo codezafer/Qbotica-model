@@ -65,29 +65,6 @@
         "goodToAdd": "Redux, React, javascript, Material Ui, JQueryecmascript"
       },
       "id": 11
-    },
-    {
-      "values": {
-        "requisitionId": "123",
-        "dateOfReq": "2022-12-17",
-        "closingDate": "2022-12-30",
-        "role": "full stack dev",
-        "client": "youtube",
-        "jobType": "Full Time",
-        "country": "USA",
-        "city": "Bangalore",
-        "state": "Karnataka",
-        "postalCode": "987456",
-        "min": "789456",
-        "max": "789456121",
-        "jd": "We are looking for a Full Stack Developer to build Forward.\n\nYou’ll be part of a cross-functional team responsible for the full software development life cycle, from conception to deployment.\n\nAs a Full Stack Developer, you should be comfortable with front-end and back-end coding languages, development frameworks, and third-party libraries. You should also be a team player with a knack for visual design and utility.\n\nWe might be a great fit if you like to ship things fast and continuously improve on what you’ve built.",
-        "resp": "We are looking for a Full Stack Developer to build Forward.\n\nYou’ll be part of a cross-functional team responsible for the full software development life cycle, from conception to deployment.\n\nAs a Full Stack Developer, you should be comfortable with front-end and back-end coding languages, development frameworks, and third-party libraries. You should also be a team player with a knack for visual design and utility.\n\nWe might be a great fit if you like to ship things fast and continuously improve on what you’ve built.",
-        "skills": "What you’ll do:\n• Work with development teams and product managers to ideate software solutions\n• Build the front-end of applications through appealing visual design\n• Write effective APIs\n• Test software to ensure responsiveness and efficiency\n• Create security and data protection settings\n• Build features and applications with a mobile responsive design\n• Write technical documentation",
-        "workType": "Hybrid",
-        "elegibleCriteria": " 2+ years",
-        "goodToAdd": "Redux, React, javascript, Material Ui, JQueryecmascript"
-      },
-      "id": 12
     }
   ],
   "candidatelist": [

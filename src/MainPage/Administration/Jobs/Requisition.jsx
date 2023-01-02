@@ -33,17 +33,6 @@ const Requisition = () => {
     } 
   }, []);
 
-  const dataWithDetails = values.map((details) => ({
-    ...details,
-    key: details.id,
-    id: details.id,
-    role: details.values.role,
-    client: details.values.client,
-    dateOfReq: details.values.dateOfReq,
-    closingDate: details.values.closingDate,
-    jobType: details.values.jobType,
-  }));
-
   const handleDelete = (id) => {
     try {
       setRequestStatus('pending')
@@ -54,7 +43,17 @@ const Requisition = () => {
       setRequestStatus('idle')
   }
   }
- 
+
+  const dataWithDetails = values.map((details) => ({
+    ...details,
+    key: details.id,
+    id: details.id,
+    role: details.values.role,
+    client: details.values.client,
+    dateOfReq: details.values.dateOfReq,
+    closingDate: details.values.closingDate,
+    jobType: details.values.jobType,
+  }));
 
   const columns = [
     {

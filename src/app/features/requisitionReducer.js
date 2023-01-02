@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const dataUrl = `http://localhost:9000/requisition`
+const dataUrl = `http://localhost:9000/requisition`;
 
 
 const initialState = {
@@ -21,8 +21,6 @@ export const getRequisitionData = createAsyncThunk(
     }
 )
 
-
-
 export const deleteRequisitionData = createAsyncThunk(
     'jobs/deleteRequisitionData', 
     async (initialPost) => {
@@ -35,9 +33,6 @@ export const deleteRequisitionData = createAsyncThunk(
             return err.message
         }
 })
-
-
-
 
 const requisitionSlice = createSlice({
     name: 'requisiton',
@@ -65,7 +60,6 @@ const requisitionSlice = createSlice({
             const values = state.values.filter((item) => item.id !== id);
             state.values = values;
         })
-        
     }
 
 });

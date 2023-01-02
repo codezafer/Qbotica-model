@@ -7,71 +7,69 @@ import { useSelector, useDispatch } from "react-redux";
 import { postRequisitionData } from "../../../app/features/createRequisitionReducer";
 
 const CreateRequisition = (props) => {
-  // const [values, setValues] = useState({
-  //   requisitionId: create_UUID(),
-  //   dateOfReq: "",
-  //   closingDate: "",
-  //   client: "",
-  //   role: "",
-  //   jobType: "",
-  //   country: "",
-  //   city: "",
-  //   state: "",
-  //   postalCode: "",
-  //   min: "",
-  //   max: "",
-  //   jd: "",
-  //   resp: "",
-  //   skills: "",
-  //   workType: "",
-  //   elegibleCriteria: "",
-  //   goodToAdd: "",
-  // });
-
-  const {posts} = useSelector((state) => state.post);
-  const dispatch = useDispatch;
+  const [value, setValue] = useState({
+    requisitionId: create_UUID(),
+    dateOfReq: "",
+    closingDate: "",
+    client: "",
+    role: "",
+    jobType: "",
+    country: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    experience: "",
+    vacancy: "",
+    min: "",
+    max: "",
+    jd: "",
+    resp: "",
+    skills: "",
+    workType: "",
+    elegibleCriteria: "",
+    goodToAdd: "",
+  });
+  const {posts,status,error} = useSelector((state) => ({...state.post}));
   const {requestStatus, setRequestStatus} = useState('idle')
+  const dispatch = useDispatch();
 
+  function create_UUID (){
+    let num = Math.floor(1000 + Math.random() * 9000);
+    return num;
+} 
+ 
   const load = requestStatus==='idle'
-
 
   const RequisitionSubmit = () => {
     if(load){
-      try{
-        setRequestStatus('pending')
-        dispatch(postRequisitionData())
-        props.history.push("/app/administrator/requisition");
-      }catch(err){
-        console.error('Failed to get the data' ,err)
-      }finally{
-        setRequestStatus('idle')
-      }
-    } 
+        try{
+          setRequestStatus('pending')
+          dispatch(postRequisitionData(posts))
+          props.history.push("/app/administrator/requisition");
+        }catch(err){
+          console.error('Failed to get the data' ,err)
+        }finally{
+          setRequestStatus('idle')
+        }
+      } 
   };
 
   useEffect(() => {
       RequisitionSubmit();
   }, []);
   
- 
-  function create_UUID (){
-    let value = Math.floor(1000 + Math.random() * 9000);
-    return value;
-}
 
-
-
-
-  // const e.target.value = (e) => {
-  //   setValues({
-  //     ...posts,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const onFormFieldChange = (e) => {
+    e.preventDefault();
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div className="page-wrapper">
       <Helmet>
-        <title>Requisition - qBotica</title>
+        <title>Create Requisition - qBotica</title>
         <meta name="description" content="Login page" />
       </Helmet>
       {/* Page Content */}
@@ -92,15 +90,16 @@ const CreateRequisition = (props) => {
                 <div className="col-sm-4">
                   <div className="form-group">
                     <label>
-                      Requisition ID<span className="text-danger">*</span>
+                      Requisition ID
                     </label>
                     <input
                       name="requisitionId"
                       className="form-control"
                       type="text"
-                      value={posts.requisitionId}
                       readOnly
-                      onChange={e.target.value}
+                      value={value.requisitionId}
+                      onChange={onFormFieldChange}
+                    
                     />
                   </div>
                 </div>
@@ -109,10 +108,11 @@ const CreateRequisition = (props) => {
                     <label>Date of Requisition</label>
                     <input
                       name="dateOfReq"
-                      value={posts.dateOfReq}
+                      value={value.dateOfReq}
                       className="form-control "
                       type="date"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -121,10 +121,11 @@ const CreateRequisition = (props) => {
                     <label>Closing Date</label>
                     <input
                       name="closingDate"
-                      value={posts.closingDate}
+                      value={value.closingDate}
                       className="form-control "
                       type="date"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -133,14 +134,15 @@ const CreateRequisition = (props) => {
                 <div className="col-sm-4">
                   <div className="form-group">
                     <label>
-                      Client<span className="text-danger">*</span>
+                      Client
                     </label>
                     <input
                       name="client"
-                      value={posts.client}
+                      value={value.client}
                       className="form-control"
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -149,10 +151,11 @@ const CreateRequisition = (props) => {
                     <label>Role / Job Title</label>
                     <input
                       name="role"
-                      value={posts.role}
+                      value={value.role}
                       className="form-control "
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -161,10 +164,11 @@ const CreateRequisition = (props) => {
                     <label>Job Type</label>
                     <input
                       name="jobType"
-                      value={posts.jobType}
+                      value={value.jobType}
                       className="form-control "
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -176,8 +180,9 @@ const CreateRequisition = (props) => {
                     <select
                       name="country"
                       className="form-control2"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
+                      
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -193,8 +198,9 @@ const CreateRequisition = (props) => {
                     <select
                       name="city"
                       className="form-control2"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
+                      
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -210,8 +216,9 @@ const CreateRequisition = (props) => {
                     <select
                       name="state"
                       className="form-control2"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
+                      
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -226,10 +233,39 @@ const CreateRequisition = (props) => {
                     <label>Postal Code</label>
                     <input
                       name="postalCode"
-                      value={posts.postalCode}
+                      value={value.postalCode}
                       className="form-control"
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  <div className="form-group">
+                    <label>Year of Experience</label>
+                    <input
+                      name="experience"
+                      value={value.experience}
+                      className="form-control"
+                      type="number"
+                      onChange={onFormFieldChange}
+                      
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-6">
+                  <div className="form-group">
+                    <label>Vacancy</label>
+                    <input
+                      name="vacancy"
+                      value={value.vacancy}
+                      className="form-control"
+                      type="number"
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -241,10 +277,11 @@ const CreateRequisition = (props) => {
                     <label>Min</label>
                     <input
                       name="min"
-                      value={posts.min}
+                      value={value.min}
                       className="form-control"
                       type="number"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -253,10 +290,11 @@ const CreateRequisition = (props) => {
                     <label>Max</label>
                     <input
                       name="max"
-                      value={posts.max}
+                      value={value.max}
                       className="form-control"
                       type="number"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -267,10 +305,11 @@ const CreateRequisition = (props) => {
                     <label>Job Description</label>
                     <textarea
                       name="jd"
-                      value={posts.jd}
+                      value={value.jd}
                       className="form-control"
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -281,10 +320,11 @@ const CreateRequisition = (props) => {
                     <label>Roles & Responsibilities</label>
                     <textarea
                       name="resp"
-                      value={posts.resp}
+                      value={value.resp}
                       className="form-control"
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -295,10 +335,11 @@ const CreateRequisition = (props) => {
                     <label>Desired skills</label>
                     <textarea
                       name="skills"
-                      value={posts.skills}
+                      value={value.skills}
                       className="form-control"
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
@@ -310,8 +351,9 @@ const CreateRequisition = (props) => {
                     <select
                       name="workType"
                       className="form-control2"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
+                      
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -327,10 +369,11 @@ const CreateRequisition = (props) => {
                     <label>Elegible Criteria</label>
                     <input
                       name="elegibleCriteria"
-                      value={posts.elegibleCriteria}
+                      value={value.elegibleCriteria}
                       className="form-control "
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                  
                     />
                   </div>
                 </div>
@@ -339,10 +382,11 @@ const CreateRequisition = (props) => {
                     <label>Good to add</label>
                     <input
                       name="goodToAdd"
-                      value={posts.goodToAdd}
+                      value={value.goodToAdd}
                       className="form-control "
                       type="text"
-                      onChange={e.target.value}
+                      onChange={onFormFieldChange}
+                      
                     />
                   </div>
                 </div>
