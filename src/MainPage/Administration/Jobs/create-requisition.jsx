@@ -6,46 +6,48 @@ import { useForm, Controller, set } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { postRequisitionData } from "../../../app/features/createRequisitionReducer";
 
+const initialState= {
+  requisitionId: create_UUID(),
+  dateOfReq: "",
+  closingDate: "",
+  client: "",
+  role: "",
+  jobType: "",
+  country: "",
+  city: "",
+  state: "",
+  postalCode: "",
+  experience: "",
+  vacancy: "",
+  min: "",
+  max: "",
+  jd: "",
+  resp: "",
+  skills: "",
+  workType: "",
+  elegibleCriteria: "",
+  goodToAdd: "",
+};
+function create_UUID (){ 
+  let num = Math.floor(1000 + Math.random() * 9000);
+  return num;
+} 
+
 const CreateRequisition = (props) => {
-  const [value, setValue] = useState({
-    requisitionId: create_UUID(),
-    dateOfReq: "",
-    closingDate: "",
-    client: "",
-    role: "",
-    jobType: "",
-    country: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    experience: "",
-    vacancy: "",
-    min: "",
-    max: "",
-    jd: "",
-    resp: "",
-    skills: "",
-    workType: "",
-    elegibleCriteria: "",
-    goodToAdd: "",
-  });
-  const {posts,status,error} = useSelector((state) => ({...state.post}));
+  const [formValue, setFormValue] = useState(initialState)
+  const posts = useSelector((state) => ({...state.posts}));
+  console.log(posts)
   const {requestStatus, setRequestStatus} = useState('idle')
   const dispatch = useDispatch();
 
-  function create_UUID (){
-    let num = Math.floor(1000 + Math.random() * 9000);
-    return num;
-} 
- 
   const load = requestStatus==='idle'
 
-  const RequisitionSubmit = () => {
+  const RequisitionSubmit =() => {
     if(load){
         try{
           setRequestStatus('pending')
           dispatch(postRequisitionData(posts))
-          props.history.push("/app/administrator/requisition");
+          props.history.push("/app/administrator/requisition");  
         }catch(err){
           console.error('Failed to get the data' ,err)
         }finally{
@@ -61,9 +63,10 @@ const CreateRequisition = (props) => {
 
   const onFormFieldChange = (e) => {
     e.preventDefault();
-    setValue({
-      ...value,
-      [e.target.name]: e.target.value,
+    const {name,value} = e.target
+    setFormValue({
+      ...posts,
+      [name]: value,
     });
   };
   return (
@@ -97,7 +100,7 @@ const CreateRequisition = (props) => {
                       className="form-control"
                       type="text"
                       readOnly
-                      value={value.requisitionId}
+                      value={formValue.requisitionId}
                       onChange={onFormFieldChange}
                     
                     />
@@ -108,7 +111,7 @@ const CreateRequisition = (props) => {
                     <label>Date of Requisition</label>
                     <input
                       name="dateOfReq"
-                      value={value.dateOfReq}
+                      value={formValue.dateOfReq}
                       className="form-control "
                       type="date"
                       onChange={onFormFieldChange}
@@ -121,7 +124,7 @@ const CreateRequisition = (props) => {
                     <label>Closing Date</label>
                     <input
                       name="closingDate"
-                      value={value.closingDate}
+                      value={formValue.closingDate}
                       className="form-control "
                       type="date"
                       onChange={onFormFieldChange}
@@ -138,7 +141,7 @@ const CreateRequisition = (props) => {
                     </label>
                     <input
                       name="client"
-                      value={value.client}
+                      value={formValue.client}
                       className="form-control"
                       type="text"
                       onChange={onFormFieldChange}
@@ -151,7 +154,7 @@ const CreateRequisition = (props) => {
                     <label>Role / Job Title</label>
                     <input
                       name="role"
-                      value={value.role}
+                      value={formValue.role}
                       className="form-control "
                       type="text"
                       onChange={onFormFieldChange}
@@ -164,7 +167,7 @@ const CreateRequisition = (props) => {
                     <label>Job Type</label>
                     <input
                       name="jobType"
-                      value={value.jobType}
+                      value={formValue.jobType}
                       className="form-control "
                       type="text"
                       onChange={onFormFieldChange}
@@ -182,7 +185,7 @@ const CreateRequisition = (props) => {
                       className="form-control2"
                       onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
-                      
+                      value={formValue.country}
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -200,7 +203,7 @@ const CreateRequisition = (props) => {
                       className="form-control2"
                       onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
-                      
+                      value={formValue.city}
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -218,7 +221,7 @@ const CreateRequisition = (props) => {
                       className="form-control2"
                       onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
-                      
+                      value={formValue.state}
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -233,7 +236,7 @@ const CreateRequisition = (props) => {
                     <label>Postal Code</label>
                     <input
                       name="postalCode"
-                      value={value.postalCode}
+                      value={formValue.postalCode}
                       className="form-control"
                       type="text"
                       onChange={onFormFieldChange}
@@ -248,7 +251,7 @@ const CreateRequisition = (props) => {
                     <label>Year of Experience</label>
                     <input
                       name="experience"
-                      value={value.experience}
+                      value={formValue.experience}
                       className="form-control"
                       type="number"
                       onChange={onFormFieldChange}
@@ -261,7 +264,7 @@ const CreateRequisition = (props) => {
                     <label>Vacancy</label>
                     <input
                       name="vacancy"
-                      value={value.vacancy}
+                      value={formValue.vacancy}
                       className="form-control"
                       type="number"
                       onChange={onFormFieldChange}
@@ -277,7 +280,7 @@ const CreateRequisition = (props) => {
                     <label>Min</label>
                     <input
                       name="min"
-                      value={value.min}
+                      value={formValue.min}
                       className="form-control"
                       type="number"
                       onChange={onFormFieldChange}
@@ -290,7 +293,7 @@ const CreateRequisition = (props) => {
                     <label>Max</label>
                     <input
                       name="max"
-                      value={value.max}
+                      value={formValue.max}
                       className="form-control"
                       type="number"
                       onChange={onFormFieldChange}
@@ -305,7 +308,7 @@ const CreateRequisition = (props) => {
                     <label>Job Description</label>
                     <textarea
                       name="jd"
-                      value={value.jd}
+                      value={formValue.jd}
                       className="form-control"
                       type="text"
                       onChange={onFormFieldChange}
@@ -320,7 +323,7 @@ const CreateRequisition = (props) => {
                     <label>Roles & Responsibilities</label>
                     <textarea
                       name="resp"
-                      value={value.resp}
+                      value={formValue.resp}
                       className="form-control"
                       type="text"
                       onChange={onFormFieldChange}
@@ -335,7 +338,7 @@ const CreateRequisition = (props) => {
                     <label>Desired skills</label>
                     <textarea
                       name="skills"
-                      value={value.skills}
+                      value={formValue.skills}
                       className="form-control"
                       type="text"
                       onChange={onFormFieldChange}
@@ -353,7 +356,7 @@ const CreateRequisition = (props) => {
                       className="form-control2"
                       onChange={onFormFieldChange}
                       defaultValue={"DEFAULT"}
-                      
+                      value={formValue.workType}
                     >
                       <option value="DEFAULT" disabled>
                         Select
@@ -369,7 +372,7 @@ const CreateRequisition = (props) => {
                     <label>Elegible Criteria</label>
                     <input
                       name="elegibleCriteria"
-                      value={value.elegibleCriteria}
+                      value={formValue.elegibleCriteria}
                       className="form-control "
                       type="text"
                       onChange={onFormFieldChange}
@@ -382,7 +385,7 @@ const CreateRequisition = (props) => {
                     <label>Good to add</label>
                     <input
                       name="goodToAdd"
-                      value={value.goodToAdd}
+                      value={formValue.goodToAdd}
                       className="form-control "
                       type="text"
                       onChange={onFormFieldChange}

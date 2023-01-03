@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 const dataUrl = `http://localhost:9000/requisition`
 
 const initialState = {
-    posts:[],
+    posts: [],
     status: 'idle',
     error: null
 }
 
 export const postRequisitionData = createAsyncThunk(
     'jobs/postRequisitionData',
-    async(value) => {
+    async(values) => {
         try{
-            const response = await axios.post(dataUrl,{value})
+            const response = await axios.post(dataUrl,values)
             return [...response.data]   
         }catch(err) {
             return err.message
@@ -30,7 +31,8 @@ const postRequisitionSlice = createSlice({
         })
         .addCase(postRequisitionData.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.posts = action.payload;
+            console.log(action.payload)
+            state.posts.push(action.payload);
         })
         .addCase(postRequisitionData.rejected, (state, action) => {
             state.status = 'failed';

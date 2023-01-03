@@ -34,6 +34,7 @@ export const deleteRequisitionData = createAsyncThunk(
         }
 })
 
+
 const requisitionSlice = createSlice({
     name: 'requisiton',
     initialState: initialState,
